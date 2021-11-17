@@ -1,0 +1,13 @@
+p{
+     
+     color: green;
+     font-size: 1em;
+}
+dt{clor :green}
+dd{color: green;}
+ul{color: green;}
+li{color: green;}
+dl{color: green;}
+p.endereco{
+     color: orange ;
+}

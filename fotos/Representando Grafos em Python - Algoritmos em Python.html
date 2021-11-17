@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Representando Grafos em Python - Algoritmos em Python</title><meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<meta property="og:description" content="Como representar grafos em Python. Representação de grafo em Python. Matriz de adjacência. Lista de adjacência.">
+	<meta name="twitter:description" content="Como representar grafos em Python. Representação de grafo em Python. Matriz de adjacência. Lista de adjacência.">
+	<meta name="description" content="Como representar grafos em Python. Representação de grafo em Python. Matriz de adjacência. Lista de adjacência.">
+	<meta name="description" content="Como representar grafos em Python. Representação de grafo em Python. Matriz de adjacência. Lista de adjacência.">
+
+	<meta property="og:title" content="Representando Grafos em Python | Algoritmos em Python">
+	<meta name="twitter:title" content="Representando Grafos em Python | Algoritmos em Python">
+
+	<meta property="og:image" content="">
+	<meta itemprop="name" content="Representando Grafos em Python | Algoritmos em Python">
+	<meta name="application-name" content="Representando Grafos em Python | Algoritmos em Python">
+	<meta property="og:site_name" content="">
+	<style type="text/css">svg:not(:root).svg-inline--fa {
+  overflow: visible; }
+
+.svg-inline--fa {
+  display: inline-block;
+  font-size: inherit;
+  height: 1em;
+  overflow: visible;
+  vertical-align: -.125em; }
+  .svg-inline--fa.fa-lg {
+    vertical-align: -.225em; }
+  .svg-inline--fa.fa-w-1 {
+    width: 0.0625em; }
+  .svg-inline--fa.fa-w-2 {
+    width: 0.125em; }
+  .svg-inline--fa.fa-w-3 {
+    width: 0.1875em; }
+  .svg-inline--fa.fa-w-4 {
+    width: 0.25em; }
+  .svg-inline--fa.fa-w-5 {
+    width: 0.3125em; }
+  .svg-inline--fa.fa-w-6 {
+    width: 0.375em; }
+  .svg-inline--fa.fa-w-7 {
+    width: 0.4375em; }
+  .svg-inline--fa.fa-w-8 {
+    width: 0.5em; }
+  .svg-inline--fa.fa-w-9 {
+    width: 0.5625em; }
+  .svg-inline--fa.fa-w-10 {
+    width: 0.625em; }
+  .svg-inline--fa.fa-w-11 {
+    width: 0.6875em; }
+  .svg-inline--fa.fa-w-12 {
+    width: 0.75em; }
+  .svg-inline--fa.fa-w-13 {
+    width: 0.8125em; }
+  .svg-inline--fa.fa-w-14 {
+    width: 0.875em; }
+  .svg-inline--fa.fa-w-15 {
+    width: 0.9375em; }
+  .svg-inline--fa.fa-w-16 {
+    width: 1em; }
+  .svg-inline--fa.fa-w-17 {
+    width: 1.0625em; }
+  .svg-inline--fa.fa-w-18 {
+    width: 1.125em; }
+  .svg-inline--fa.fa-w-19 {
+    width: 1.1875em; }
+  .svg-inline--fa.fa-w-20 {
+    width: 1.25em; }
+  .svg-inline--fa.fa-pull-left {
+    margin-right: .3em;
+    width: auto; }
+  .svg-inline--fa.fa-pull-right {
+    margin-left: .3em;
+    width: auto; }
+  .svg-inline--fa.fa-border {
+    height: 1.5em; }
+  .svg-inline--fa.fa-li {
+    width: 2em; }
+  .svg-inline--fa.fa-fw {
+    width: 1.25em; }
+
+.fa-layers svg.svg-inline--fa {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0; }
+
+.fa-layers {
+  display: inline-block;
+  height: 1em;
+  position: relative;
+  text-align: center;
+  vertical-align: -.125em;
+  width: 1em; }
+  .fa-layers svg.svg-inline--fa {
+    -webkit-transform-origin: center center;
+            transform-origin: center center; }
+
+.fa-layers-text, .fa-layers-counter {
+  display: inline-block;
+  position: absolute;
+  text-align: center; }
+
+.fa-layers-text {
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-transform-origin: center center;
+          transform-origin: center center; }
+
+.fa-layers-counter {
+  background-color: #ff253a;
+  border-radius: 1em;
+  color: #fff;
+  height: 1.5em;
+  line-height: 1;
+  max-width: 5em;
+  min-width: 1.5em;
+  overflow: hidden;
+  padding: .25em;
+  right: 0;
+  text-overflow: ellipsis;
+  top: 0;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: top right;
+          transform-origin: top right; }
+
+.fa-layers-bottom-right {
+  bottom: 0;
+  right: 0;
+  top: auto;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: bottom right;
+          transform-origin: bottom right; }
+
+.fa-layers-bottom-left {
+  bottom: 0;
+  left: 0;
+  right: auto;
+  top: auto;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: bottom left;
+          transform-origin: bottom left; }
+
+.fa-layers-top-right {
+  right: 0;
+  top: 0;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: top right;
+          transform-origin: top right; }
+
+.fa-layers-top-left {
+  left: 0;
+  right: auto;
+  top: 0;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: top left;
+          transform-origin: top left; }
+
+.fa-lg {
+  font-size: 1.33333em;
+  line-height: 0.75em;
+  vertical-align: -.0667em; }
+
+.fa-xs {
+  font-size: .75em; }
+
+.fa-sm {
+  font-size: .875em; }
+
+.fa-1x {
+  font-size: 1em; }
+
+.fa-2x {
+  font-size: 2em; }
+
+.fa-3x {
+  font-size: 3em; }
+
+.fa-4x {
+  font-size: 4em; }
+
+.fa-5x {
+  font-size: 5em; }
+
+.fa-6x {
+  font-size: 6em; }
+
+.fa-7x {
+  font-size: 7em; }
+
+.fa-8x {
+  font-size: 8em; }
+
+.fa-9x {
+  font-size: 9em; }
+
+.fa-10x {
+  font-size: 10em; }
+
+.fa-fw {
+  text-align: center;
+  width: 1.25em; }
+
+.fa-ul {
+  list-style-type: none;
+  margin-left: 2.5em;
+  padding-left: 0; }
+  .fa-ul > li {
+    position: relative; }
+
+.fa-li {
+  left: -2em;
+  position: absolute;
+  text-align: center;
+  width: 2em;
+  line-height: inherit; }
+
+.fa-border {
+  border: solid 0.08em #eee;
+  border-radius: .1em;
+  padding: .2em .25em .15em; }
+
+.fa-pull-left {
+  float: left; }
+
+.fa-pull-right {
+  float: right; }
+
+.fa.fa-pull-left,
+.fas.fa-pull-left,
+.far.fa-pull-left,
+.fal.fa-pull-left,
+.fab.fa-pull-left {
+  margin-right: .3em; }
+
+.fa.fa-pull-right,
+.fas.fa-pull-right,
+.far.fa-pull-right,
+.fal.fa-pull-right,
+.fab.fa-pull-right {
+  margin-left: .3em; }
+
+.fa-spin {
+  -webkit-animation: fa-spin 2s infinite linear;
+          animation: fa-spin 2s infinite linear; }
+
+.fa-pulse {
+  -webkit-animation: fa-spin 1s infinite steps(8);
+          animation: fa-spin 1s infinite steps(8); }
+
+@-webkit-keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
+@keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
+.fa-rotate-90 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg); }
+
+.fa-rotate-180 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg); }
+
+.fa-rotate-270 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
+  -webkit-transform: rotate(270deg);
+          transform: rotate(270deg); }
+
+.fa-flip-horizontal {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
+  -webkit-transform: scale(-1, 1);
+          transform: scale(-1, 1); }
+
+.fa-flip-vertical {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
+  -webkit-transform: scale(1, -1);
+          transform: scale(1, -1); }
+
+.fa-flip-horizontal.fa-flip-vertical {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
+  -webkit-transform: scale(-1, -1);
+          transform: scale(-1, -1); }
+
+:root .fa-rotate-90,
+:root .fa-rotate-180,
+:root .fa-rotate-270,
+:root .fa-flip-horizontal,
+:root .fa-flip-vertical {
+  -webkit-filter: none;
+          filter: none; }
+
+.fa-stack {
+  display: inline-block;
+  height: 2em;
+  position: relative;
+  width: 2em; }
+
+.fa-stack-1x,
+.fa-stack-2x {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0; }
+
+.svg-inline--fa.fa-stack-1x {
+  height: 1em;
+  width: 1em; }
+
+.svg-inline--fa.fa-stack-2x {
+  height: 2em;
+  width: 2em; }
+
+.fa-inverse {
+  color: #fff; }
+
+.sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px; }
+
+.sr-only-focusable:active, .sr-only-focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto; }
+</style><link rel="icon" type="image/svg+xml" href="https://algoritmosempython.com.br/images/favicon.svg">
+
+	<link href="Representando%20Grafos%20em%20Python%20-%20Algoritmos%20em%20Python_arquivos/css2.css" rel="stylesheet">
+	
+	
+
+	<script type="text/javascript" async="" src="Representando%20Grafos%20em%20Python%20-%20Algoritmos%20em%20Python_arquivos/analytics.js"></script><script src="Representando%20Grafos%20em%20Python%20-%20Algoritmos%20em%20Python_arquivos/highlight.js"></script>
+	<script>
+		hljs.configure({
+			tabReplace: '    ', 
+			languages: ['python']
+						
+		});
+		hljs.initHighlightingOnLoad();
+	</script>
+
+	
+	
+	
+		<link rel="stylesheet" type="text/css" media="screen" href="Representando%20Grafos%20em%20Python%20-%20Algoritmos%20em%20Python_arquivos/asciidoctor.css">
+	
+		<link rel="stylesheet" type="text/css" media="screen" href="Representando%20Grafos%20em%20Python%20-%20Algoritmos%20em%20Python_arquivos/highlight.css">
+	
+		<link rel="stylesheet" type="text/css" media="screen" href="Representando%20Grafos%20em%20Python%20-%20Algoritmos%20em%20Python_arquivos/custom.css">
+	
+	<link rel="stylesheet" type="text/css" href="Representando%20Grafos%20em%20Python%20-%20Algoritmos%20em%20Python_arquivos/main.css">	
+	<link rel="stylesheet" href="Representando%20Grafos%20em%20Python%20-%20Algoritmos%20em%20Python_arquivos/bootstrap.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="Representando%20Grafos%20em%20Python%20-%20Algoritmos%20em%20Python_arquivos/all.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous">
+	<link rel="stylesheet" href="Representando%20Grafos%20em%20Python%20-%20Algoritmos%20em%20Python_arquivos/v4-shims.css" integrity="sha256-wN7QJaqAwQ03kgUhyN4EU2phRdDkLrQYbFe0EvpQ60U=" crossorigin="anonymous">
+	
+  
+  <script src="Representando%20Grafos%20em%20Python%20-%20Algoritmos%20em%20Python_arquivos/MathJax.js" id="">
+  </script>
+  <script type="text/x-mathjax-config;executed=true">
+    MathJax.Hub.Config({
+      MatchWebFonts: {
+        matchFor: {
+          "HTML-CSS": true,
+          NativeMML: false,
+          SVG: false
+        },
+      },
+      tex2jax: {
+        inlineMath: [['$','$']]
+      },
+      "HTML-CSS": {
+        linebreaks: {
+          automatic: true
+        },
+        scale: 85,
+        preferredFont: "TeX",
+        mtextFontInherit: true,
+        matchFontHeight: true        
+      }
+    });        
+  </script>	
+
+    
+	<script async="" src="Representando%20Grafos%20em%20Python%20-%20Algoritmos%20em%20Python_arquivos/js.js"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() {
+			dataLayer.push(arguments);
+		}
+		gtag('js', new Date());
+		gtag('config', 'UA-100354936-1');
+	</script>
+  
+  
+  <style>
+    .exercise {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 0;
+    margin-right: 0;
+    }
+  </style>
+  <script async="" src="Representando%20Grafos%20em%20Python%20-%20Algoritmos%20em%20Python_arquivos/dcl-react-dev.js"></script>
+  
+<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style id="ace_editor.css">.ace_editor {position: relative;overflow: hidden;font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;direction: ltr;text-align: left;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);}.ace_scroller {position: absolute;overflow: hidden;top: 0;bottom: 0;background-color: inherit;-ms-user-select: none;-moz-user-select: none;-webkit-user-select: none;user-select: none;cursor: text;}.ace_content {position: absolute;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;min-width: 100%;}.ace_dragging .ace_scroller:before{position: absolute;top: 0;left: 0;right: 0;bottom: 0;content: '';background: rgba(250, 250, 250, 0.01);z-index: 1000;}.ace_dragging.ace_dark .ace_scroller:before{background: rgba(0, 0, 0, 0.01);}.ace_selecting, .ace_selecting * {cursor: text !important;}.ace_gutter {position: absolute;overflow : hidden;width: auto;top: 0;bottom: 0;left: 0;cursor: default;z-index: 4;-ms-user-select: none;-moz-user-select: none;-webkit-user-select: none;user-select: none;}.ace_gutter-active-line {position: absolute;left: 0;right: 0;}.ace_scroller.ace_scroll-left {box-shadow: 17px 0 16px -16px rgba(0, 0, 0, 0.4) inset;}.ace_gutter-cell {padding-left: 19px;padding-right: 6px;background-repeat: no-repeat;}.ace_gutter-cell.ace_error {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAABOFBMVEX/////////QRswFAb/Ui4wFAYwFAYwFAaWGAfDRymzOSH/PxswFAb/SiUwFAYwFAbUPRvjQiDllog5HhHdRybsTi3/Tyv9Tir+Syj/UC3////XurebMBIwFAb/RSHbPx/gUzfdwL3kzMivKBAwFAbbvbnhPx66NhowFAYwFAaZJg8wFAaxKBDZurf/RB6mMxb/SCMwFAYwFAbxQB3+RB4wFAb/Qhy4Oh+4QifbNRcwFAYwFAYwFAb/QRzdNhgwFAYwFAbav7v/Uy7oaE68MBK5LxLewr/r2NXewLswFAaxJw4wFAbkPRy2PyYwFAaxKhLm1tMwFAazPiQwFAaUGAb/QBrfOx3bvrv/VC/maE4wFAbRPBq6MRO8Qynew8Dp2tjfwb0wFAbx6eju5+by6uns4uH9/f36+vr/GkHjAAAAYnRSTlMAGt+64rnWu/bo8eAA4InH3+DwoN7j4eLi4xP99Nfg4+b+/u9B/eDs1MD1mO7+4PHg2MXa347g7vDizMLN4eG+Pv7i5evs/v79yu7S3/DV7/498Yv24eH+4ufQ3Ozu/v7+y13sRqwAAADLSURBVHjaZc/XDsFgGIBhtDrshlitmk2IrbHFqL2pvXf/+78DPokj7+Fz9qpU/9UXJIlhmPaTaQ6QPaz0mm+5gwkgovcV6GZzd5JtCQwgsxoHOvJO15kleRLAnMgHFIESUEPmawB9ngmelTtipwwfASilxOLyiV5UVUyVAfbG0cCPHig+GBkzAENHS0AstVF6bacZIOzgLmxsHbt2OecNgJC83JERmePUYq8ARGkJx6XtFsdddBQgZE2nPR6CICZhawjA4Fb/chv+399kfR+MMMDGOQAAAABJRU5ErkJggg==");background-repeat: no-repeat;background-position: 2px center;}.ace_gutter-cell.ace_warning {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAmVBMVEX///8AAAD///8AAAAAAABPSzb/5sAAAAB/blH/73z/ulkAAAAAAAD85pkAAAAAAAACAgP/vGz/rkDerGbGrV7/pkQICAf////e0IsAAAD/oED/qTvhrnUAAAD/yHD/njcAAADuv2r/nz//oTj/p064oGf/zHAAAAA9Nir/tFIAAAD/tlTiuWf/tkIAAACynXEAAAAAAAAtIRW7zBpBAAAAM3RSTlMAABR1m7RXO8Ln31Z36zT+neXe5OzooRDfn+TZ4p3h2hTf4t3k3ucyrN1K5+Xaks52Sfs9CXgrAAAAjklEQVR42o3PbQ+CIBQFYEwboPhSYgoYunIqqLn6/z8uYdH8Vmdnu9vz4WwXgN/xTPRD2+sgOcZjsge/whXZgUaYYvT8QnuJaUrjrHUQreGczuEafQCO/SJTufTbroWsPgsllVhq3wJEk2jUSzX3CUEDJC84707djRc5MTAQxoLgupWRwW6UB5fS++NV8AbOZgnsC7BpEAAAAABJRU5ErkJggg==");background-position: 2px center;}.ace_gutter-cell.ace_info {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAAAAAA6mKC9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAJ0Uk5TAAB2k804AAAAPklEQVQY02NgIB68QuO3tiLznjAwpKTgNyDbMegwisCHZUETUZV0ZqOquBpXj2rtnpSJT1AEnnRmL2OgGgAAIKkRQap2htgAAAAASUVORK5CYII=");background-position: 2px center;}.ace_dark .ace_gutter-cell.ace_info {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAJFBMVEUAAAChoaGAgIAqKiq+vr6tra1ZWVmUlJSbm5s8PDxubm56enrdgzg3AAAAAXRSTlMAQObYZgAAAClJREFUeNpjYMAPdsMYHegyJZFQBlsUlMFVCWUYKkAZMxZAGdxlDMQBAG+TBP4B6RyJAAAAAElFTkSuQmCC");}.ace_scrollbar {position: absolute;right: 0;bottom: 0;z-index: 6;}.ace_scrollbar-inner {position: absolute;cursor: text;left: 0;top: 0;}.ace_scrollbar-v{overflow-x: hidden;overflow-y: scroll;top: 0;}.ace_scrollbar-h {overflow-x: scroll;overflow-y: hidden;left: 0;}.ace_print-margin {position: absolute;height: 100%;}.ace_text-input {position: absolute;z-index: 0;width: 0.5em;height: 1em;opacity: 0;background: transparent;-moz-appearance: none;appearance: none;border: none;resize: none;outline: none;overflow: hidden;font: inherit;padding: 0 1px;margin: 0 -1px;text-indent: -1em;-ms-user-select: text;-moz-user-select: text;-webkit-user-select: text;user-select: text;white-space: pre!important;}.ace_text-input.ace_composition {background: inherit;color: inherit;z-index: 1000;opacity: 1;text-indent: 0;}.ace_layer {z-index: 1;position: absolute;overflow: hidden;word-wrap: normal;white-space: pre;height: 100%;width: 100%;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;pointer-events: none;}.ace_gutter-layer {position: relative;width: auto;text-align: right;pointer-events: auto;}.ace_text-layer {font: inherit !important;}.ace_cjk {display: inline-block;text-align: center;}.ace_cursor-layer {z-index: 4;}.ace_cursor {z-index: 4;position: absolute;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;border-left: 2px solid;transform: translatez(0);}.ace_multiselect .ace_cursor {border-left-width: 1px;}.ace_slim-cursors .ace_cursor {border-left-width: 1px;}.ace_overwrite-cursors .ace_cursor {border-left-width: 0;border-bottom: 1px solid;}.ace_hidden-cursors .ace_cursor {opacity: 0.2;}.ace_smooth-blinking .ace_cursor {-webkit-transition: opacity 0.18s;transition: opacity 0.18s;}.ace_marker-layer .ace_step, .ace_marker-layer .ace_stack {position: absolute;z-index: 3;}.ace_marker-layer .ace_selection {position: absolute;z-index: 5;}.ace_marker-layer .ace_bracket {position: absolute;z-index: 6;}.ace_marker-layer .ace_active-line {position: absolute;z-index: 2;}.ace_marker-layer .ace_selected-word {position: absolute;z-index: 4;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;}.ace_line .ace_fold {-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;display: inline-block;height: 11px;margin-top: -2px;vertical-align: middle;background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAJCAYAAADU6McMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJpJREFUeNpi/P//PwOlgAXGYGRklAVSokD8GmjwY1wasKljQpYACtpCFeADcHVQfQyMQAwzwAZI3wJKvCLkfKBaMSClBlR7BOQikCFGQEErIH0VqkabiGCAqwUadAzZJRxQr/0gwiXIal8zQQPnNVTgJ1TdawL0T5gBIP1MUJNhBv2HKoQHHjqNrA4WO4zY0glyNKLT2KIfIMAAQsdgGiXvgnYAAAAASUVORK5CYII="),url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA3CAYAAADNNiA5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACJJREFUeNpi+P//fxgTAwPDBxDxD078RSX+YeEyDFMCIMAAI3INmXiwf2YAAAAASUVORK5CYII=");background-repeat: no-repeat, repeat-x;background-position: center center, top left;color: transparent;border: 1px solid black;border-radius: 2px;cursor: pointer;pointer-events: auto;}.ace_dark .ace_fold {}.ace_fold:hover{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAJCAYAAADU6McMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJpJREFUeNpi/P//PwOlgAXGYGRklAVSokD8GmjwY1wasKljQpYACtpCFeADcHVQfQyMQAwzwAZI3wJKvCLkfKBaMSClBlR7BOQikCFGQEErIH0VqkabiGCAqwUadAzZJRxQr/0gwiXIal8zQQPnNVTgJ1TdawL0T5gBIP1MUJNhBv2HKoQHHjqNrA4WO4zY0glyNKLT2KIfIMAAQsdgGiXvgnYAAAAASUVORK5CYII="),url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA3CAYAAADNNiA5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACBJREFUeNpi+P//fz4TAwPDZxDxD5X4i5fLMEwJgAADAEPVDbjNw87ZAAAAAElFTkSuQmCC");}.ace_tooltip {background-color: #FFF;background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.1));background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.1));border: 1px solid gray;border-radius: 1px;box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);color: black;max-width: 100%;padding: 3px 4px;position: fixed;z-index: 999999;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;cursor: default;white-space: pre;word-wrap: break-word;line-height: normal;font-style: normal;font-weight: normal;letter-spacing: normal;pointer-events: none;}.ace_folding-enabled > .ace_gutter-cell {padding-right: 13px;}.ace_fold-widget {-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;margin: 0 -12px 0 1px;display: none;width: 11px;vertical-align: top;background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAANElEQVR42mWKsQ0AMAzC8ixLlrzQjzmBiEjp0A6WwBCSPgKAXoLkqSot7nN3yMwR7pZ32NzpKkVoDBUxKAAAAABJRU5ErkJggg==");background-repeat: no-repeat;background-position: center;border-radius: 3px;border: 1px solid transparent;cursor: pointer;}.ace_folding-enabled .ace_fold-widget {display: inline-block;   }.ace_fold-widget.ace_end {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAANElEQVR42m3HwQkAMAhD0YzsRchFKI7sAikeWkrxwScEB0nh5e7KTPWimZki4tYfVbX+MNl4pyZXejUO1QAAAABJRU5ErkJggg==");}.ace_fold-widget.ace_closed {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAGCAYAAAAG5SQMAAAAOUlEQVR42jXKwQkAMAgDwKwqKD4EwQ26sSOkVWjgIIHAzPiCgaqiqnJHZnKICBERHN194O5b9vbLuAVRL+l0YWnZAAAAAElFTkSuQmCCXA==");}.ace_fold-widget:hover {border: 1px solid rgba(0, 0, 0, 0.3);background-color: rgba(255, 255, 255, 0.2);box-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);}.ace_fold-widget:active {border: 1px solid rgba(0, 0, 0, 0.4);background-color: rgba(0, 0, 0, 0.05);box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);}.ace_dark .ace_fold-widget {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHklEQVQIW2P4//8/AzoGEQ7oGCaLLAhWiSwB146BAQCSTPYocqT0AAAAAElFTkSuQmCC");}.ace_dark .ace_fold-widget.ace_end {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAH0lEQVQIW2P4//8/AxQ7wNjIAjDMgC4AxjCVKBirIAAF0kz2rlhxpAAAAABJRU5ErkJggg==");}.ace_dark .ace_fold-widget.ace_closed {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAFCAYAAACAcVaiAAAAHElEQVQIW2P4//+/AxAzgDADlOOAznHAKgPWAwARji8UIDTfQQAAAABJRU5ErkJggg==");}.ace_dark .ace_fold-widget:hover {box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);background-color: rgba(255, 255, 255, 0.1);}.ace_dark .ace_fold-widget:active {box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);}.ace_fold-widget.ace_invalid {background-color: #FFB4B4;border-color: #DE5555;}.ace_fade-fold-widgets .ace_fold-widget {-webkit-transition: opacity 0.4s ease 0.05s;transition: opacity 0.4s ease 0.05s;opacity: 0;}.ace_fade-fold-widgets:hover .ace_fold-widget {-webkit-transition: opacity 0.05s ease 0.05s;transition: opacity 0.05s ease 0.05s;opacity:1;}.ace_underline {text-decoration: underline;}.ace_bold {font-weight: bold;}.ace_nobold .ace_bold {font-weight: normal;}.ace_italic {font-style: italic;}.ace_error-marker {background-color: rgba(255, 0, 0,0.2);position: absolute;z-index: 9;}.ace_highlight-marker {background-color: rgba(255, 255, 0,0.2);position: absolute;z-index: 8;}.ace_br1 {border-top-left-radius    : 3px;}.ace_br2 {border-top-right-radius   : 3px;}.ace_br3 {border-top-left-radius    : 3px; border-top-right-radius:    3px;}.ace_br4 {border-bottom-right-radius: 3px;}.ace_br5 {border-top-left-radius    : 3px; border-bottom-right-radius: 3px;}.ace_br6 {border-top-right-radius   : 3px; border-bottom-right-radius: 3px;}.ace_br7 {border-top-left-radius    : 3px; border-top-right-radius:    3px; border-bottom-right-radius: 3px;}.ace_br8 {border-bottom-left-radius : 3px;}.ace_br9 {border-top-left-radius    : 3px; border-bottom-left-radius:  3px;}.ace_br10{border-top-right-radius   : 3px; border-bottom-left-radius:  3px;}.ace_br11{border-top-left-radius    : 3px; border-top-right-radius:    3px; border-bottom-left-radius:  3px;}.ace_br12{border-bottom-right-radius: 3px; border-bottom-left-radius:  3px;}.ace_br13{border-top-left-radius    : 3px; border-bottom-right-radius: 3px; border-bottom-left-radius:  3px;}.ace_br14{border-top-right-radius   : 3px; border-bottom-right-radius: 3px; border-bottom-left-radius:  3px;}.ace_br15{border-top-left-radius    : 3px; border-top-right-radius:    3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px;}.ace_text-input-ios {position: absolute !important;top: -100000px !important;left: -100000px !important;}
+/*# sourceURL=ace/css/ace_editor.css */</style><style id="ace-tm">.ace-tm .ace_gutter {background: #f0f0f0;color: #333;}.ace-tm .ace_print-margin {width: 1px;background: #e8e8e8;}.ace-tm .ace_fold {background-color: #6B72E6;}.ace-tm {background-color: #FFFFFF;color: black;}.ace-tm .ace_cursor {color: black;}.ace-tm .ace_invisible {color: rgb(191, 191, 191);}.ace-tm .ace_storage,.ace-tm .ace_keyword {color: blue;}.ace-tm .ace_constant {color: rgb(197, 6, 11);}.ace-tm .ace_constant.ace_buildin {color: rgb(88, 72, 246);}.ace-tm .ace_constant.ace_language {color: rgb(88, 92, 246);}.ace-tm .ace_constant.ace_library {color: rgb(6, 150, 14);}.ace-tm .ace_invalid {background-color: rgba(255, 0, 0, 0.1);color: red;}.ace-tm .ace_support.ace_function {color: rgb(60, 76, 114);}.ace-tm .ace_support.ace_constant {color: rgb(6, 150, 14);}.ace-tm .ace_support.ace_type,.ace-tm .ace_support.ace_class {color: rgb(109, 121, 222);}.ace-tm .ace_keyword.ace_operator {color: rgb(104, 118, 135);}.ace-tm .ace_string {color: rgb(3, 106, 7);}.ace-tm .ace_comment {color: rgb(76, 136, 107);}.ace-tm .ace_comment.ace_doc {color: rgb(0, 102, 255);}.ace-tm .ace_comment.ace_doc.ace_tag {color: rgb(128, 159, 191);}.ace-tm .ace_constant.ace_numeric {color: rgb(0, 0, 205);}.ace-tm .ace_variable {color: rgb(49, 132, 149);}.ace-tm .ace_xml-pe {color: rgb(104, 104, 91);}.ace-tm .ace_entity.ace_name.ace_function {color: #0000A2;}.ace-tm .ace_heading {color: rgb(12, 7, 255);}.ace-tm .ace_list {color:rgb(185, 6, 144);}.ace-tm .ace_meta.ace_tag {color:rgb(0, 22, 142);}.ace-tm .ace_string.ace_regex {color: rgb(255, 0, 0)}.ace-tm .ace_marker-layer .ace_selection {background: rgb(181, 213, 255);}.ace-tm.ace_multiselect .ace_selection.ace_start {box-shadow: 0 0 3px 0px white;}.ace-tm .ace_marker-layer .ace_step {background: rgb(252, 255, 0);}.ace-tm .ace_marker-layer .ace_stack {background: rgb(164, 229, 101);}.ace-tm .ace_marker-layer .ace_bracket {margin: -1px 0 0 -1px;border: 1px solid rgb(192, 192, 192);}.ace-tm .ace_marker-layer .ace_active-line {background: rgba(0, 0, 0, 0.07);}.ace-tm .ace_gutter-active-line {background-color : #dcdcdc;}.ace-tm .ace_marker-layer .ace_selected-word {background: rgb(250, 250, 255);border: 1px solid rgb(200, 200, 250);}.ace-tm .ace_indent-guide {background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==") right repeat-y;}
+/*# sourceURL=ace/css/ace-tm */</style><style>    .error_widget_wrapper {        background: inherit;        color: inherit;        border:none    }    .error_widget {        border-top: solid 2px;        border-bottom: solid 2px;        margin: 5px 0;        padding: 10px 40px;        white-space: pre-wrap;    }    .error_widget.ace_error, .error_widget_arrow.ace_error{        border-color: #ff5a5a    }    .error_widget.ace_warning, .error_widget_arrow.ace_warning{        border-color: #F1D817    }    .error_widget.ace_info, .error_widget_arrow.ace_info{        border-color: #5a5a5a    }    .error_widget.ace_ok, .error_widget_arrow.ace_ok{        border-color: #5aaa5a    }    .error_widget_arrow {        position: absolute;        border: solid 5px;        border-top-color: transparent!important;        border-right-color: transparent!important;        border-left-color: transparent!important;        top: -5px;    }</style><style>.ace_snippet-marker {    -moz-box-sizing: border-box;    box-sizing: border-box;    background: rgba(194, 193, 208, 0.09);    border: 1px dotted rgba(211, 208, 235, 0.62);    position: absolute;}</style><style>.ace_editor.ace_autocomplete .ace_marker-layer .ace_active-line {    background-color: #CAD6FA;    z-index: 1;}.ace_editor.ace_autocomplete .ace_line-hover {    border: 1px solid #abbffe;    margin-top: -1px;    background: rgba(233,233,253,0.4);}.ace_editor.ace_autocomplete .ace_line-hover {    position: absolute;    z-index: 2;}.ace_editor.ace_autocomplete .ace_scroller {   background: none;   border: none;   box-shadow: none;}.ace_rightAlignedText {    color: gray;    display: inline-block;    position: absolute;    right: 4px;    text-align: right;    z-index: -1;}.ace_editor.ace_autocomplete .ace_completion-highlight{    color: #000;    text-shadow: 0 0 0.01em;}.ace_editor.ace_autocomplete {    width: 280px;    z-index: 200000;    background: #fbfbfb;    color: #444;    border: 1px lightgray solid;    position: fixed;    box-shadow: 2px 3px 5px rgba(0,0,0,.2);    line-height: 1.4;}</style><style type="text/css">.Console-module__console--I4oMQ .ace_editor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%; }
+
+.Console-module__console--I4oMQ .ace_error {
+  color: #e70909; }
+
+.Console-module__console--I4oMQ .ace_output {
+  color: #8e6627; }
+
+.Console-module__console--I4oMQ
+.ace_editor.ace_autocomplete
+.ace_marker-layer
+.ace_active-line {
+  background-color: rgba(51, 170, 204, 0.5) !important; }
+
+.Console-module__console--I4oMQ .ace_editor.ace_autocomplete .ace_line-hover {
+  border: 1px solid #3ac !important;
+  background-color: rgba(51, 170, 204, 0.32) !important; }
+
+.Console-module__console--I4oMQ .ace_editor .ace_storage.ace_type {
+  width: auto; }
+</style><style type="text/css">.Editor-module__editor--3du3f .ace_editor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  line-height: 1.3em; }
+
+.Editor-module__editor--3du3f .ace_editor[id^="ace-code-editor-"] {
+  bottom: 50px; }
+
+.Editor-module__editor--3du3f .ace_editor.ace-crimson-editor .ace_gutter {
+  background-color: #fff; }
+
+.Editor-module__editor--3du3f
+.ace_editor.ace-crimson-editor
+.ace_gutter-active-line {
+  background-color: #d5eaef; }
+
+.Editor-module__editor--3du3f
+.ace_editor.ace-crimson-editor
+.ace_marker-layer
+.ace_active-line {
+  background-color: #ebf4f7; }
+
+.Editor-module__editor--3du3f .error-line {
+  position: absolute;
+  background-color: #ffbfbf;
+  z-index: 3; }
+
+.Editor-module__editor--3du3f .error-gutter {
+  background-color: #ffbfbf; }
+
+.Editor-module__editor--3du3f .ace_gutter .ace_gutter-layer {
+  min-width: 50px !important; }
+</style><link rel="stylesheet" href="blob:https://algoritmosempython.com.br/e28f2df1-dd33-4811-8ebd-bc046e12400d"><style type="text/css">._backendStatus_17b2u_1 {
+  cursor: default;
+  display: inline-block;
+  position: relative; }
+
+._backendStatus_17b2u_1 .fa.fa-circle {
+  float: none; }
+
+._backendStatus_17b2u_1 i.fa-circle {
+  font-size: 1.1rem;
+  padding-top: 8px;
+  float: left; }
+
+._busy_17b2u_12 {
+  color: #fdc551; }
+
+._broken_17b2u_15 {
+  color: #c96768; }
+
+._none_17b2u_18 {
+  color: #d1d3d8; }
+
+._ready_17b2u_21 {
+  color: #83c967; }
+
+._statusText_17b2u_24 {
+  padding-top: 6px; }
+
+._animation_17b2u_27 {
+  position: absolute;
+  transition: all 0.3s ease-out;
+  white-space: pre;
+  right: 20px;
+  top: 5px; }
+
+._statusText_17b2u_24 {
+  display: inline; }
+
+@media screen and (max-width: 640px) {
+  ._statusText_17b2u_24 {
+    display: none; } }
+
+._hidden_17b2u_41 {
+  display: none; }
+
+._icon_17b2u_44 {
+  margin-right: 5px;
+  height: 100% !important; }
+</style><link rel="stylesheet" href="blob:https://algoritmosempython.com.br/abb7f4f6-3c2d-4d21-86c7-f0505750460d"><link rel="stylesheet" href="blob:https://algoritmosempython.com.br/1a19f8b3-ddde-4ca0-bda4-f0ae64e41870"><style type="text/css">._container_1g5c2_1 {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center; }
+
+._container_1g5c2_1 .svg-inline--fa {
+  margin: 0 0.5em; }
+
+._image_1g5c2_10 {
+  min-height: 0;
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
+  max-width: 100%; }
+
+iframe._image_1g5c2_10 {
+  width: 100%; }
+
+._bottomBar_1g5c2_20 {
+  width: 100%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  text-align: center; }
+
+._bottomBar_1g5c2_20 > div:first-child {
+  text-align: left; }
+
+._bottomBar_1g5c2_20 > div:first-child .svg-inline--fa {
+  margin-left: 0; }
+
+._bottomBar_1g5c2_20 > div:last-child {
+  text-align: right; }
+
+._bottomBar_1g5c2_20 > div:last-child .svg-inline--fa {
+  margin-right: 0; }
+
+._bottomBar_1g5c2_20 > * {
+  flex: 1 1 50%; }
+
+._bottomBar_1g5c2_20 > span {
+  flex-basis: 0;
+  text-align: center; }
+
+._button_1g5c2_42 {
+  /* stylelint-disable declaration-block-no-duplicate-properties */
+  font-size: 1rem;
+  font-weight: 700;
+  /* stylelint-enable */
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 3px;
+  font-size: 0.8667rem;
+  line-height: 1.2;
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  transition: background-color 150ms ease, color 150ms ease;
+  text-align: center;
+  cursor: pointer;
+  background: #3a3a3a;
+  color: #ffffff;
+  outline: none;
+  border: none; }
+
+._button_1g5c2_42:hover,
+._button_1g5c2_42:focus,
+._button_1g5c2_42:active:focus {
+  outline: none;
+  border: none;
+  background-color: #666666; }
+
+._button_1g5c2_42._disabled_1g5c2_66,
+._button_1g5c2_42:disabled {
+  background-color: #d5eaef;
+  color: #ffffff; }
+
+._button_1g5c2_42._disabled_1g5c2_66:hover,
+._button_1g5c2_42:disabled:hover {
+  background-color: #d5eaef;
+  color: #ffffff; }
+</style><style type="text/css">/**
+ * Copyright (c) 2014 The xterm.js authors. All rights reserved.
+ * Copyright (c) 2012-2013, Christopher Jeffrey (MIT License)
+ * https://github.com/chjj/term.js
+ * @license MIT
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * Originally forked from (with the author's permission):
+ *   Fabrice Bellard's javascript vt100 for jslinux:
+ *   http://bellard.org/jslinux/
+ *   Copyright (c) 2011 Fabrice Bellard
+ *   The original design remains. The terminal itself
+ *   has been extended to include xterm CSI codes, among
+ *   other features.
+ */
+/**
+ *  Default styles for xterm.js
+ */
+.xterm {
+  font-family: courier-new, courier, monospace;
+  font-feature-settings: "liga" 0;
+  position: relative;
+  user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none; }
+
+.xterm.focus,
+.xterm:focus {
+  outline: none; }
+
+.xterm .xterm-helpers {
+  position: absolute;
+  top: 0;
+  /**
+     * The z-index of the helpers must be higher than the canvases in order for
+     * IMEs to appear on top.
+     */
+  z-index: 10; }
+
+.xterm .xterm-helper-textarea {
+  /*
+     * HACK: to fix IE's blinking cursor
+     * Move textarea out of the screen to the far left, so that the cursor is not visible.
+     */
+  position: absolute;
+  opacity: 0;
+  left: -9999em;
+  top: 0;
+  width: 0;
+  height: 0;
+  z-index: -10;
+  /** Prevent wrapping so the IME appears against the textarea at the correct position */
+  white-space: nowrap;
+  overflow: hidden;
+  resize: none; }
+
+.xterm .composition-view {
+  /* TODO: Composition position got messed up somewhere */
+  background: #000;
+  color: #FFF;
+  display: none;
+  position: absolute;
+  white-space: nowrap;
+  z-index: 1; }
+
+.xterm .composition-view.active {
+  display: block; }
+
+.xterm .xterm-viewport {
+  /* On OS X this is required in order for the scroll bar to appear fully opaque */
+  background-color: #000;
+  overflow-y: scroll;
+  cursor: default;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0; }
+
+.xterm .xterm-screen {
+  position: relative; }
+
+.xterm .xterm-screen canvas {
+  position: absolute;
+  left: 0;
+  top: 0; }
+
+.xterm .xterm-scroll-area {
+  visibility: hidden; }
+
+.xterm-char-measure-element {
+  display: inline-block;
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: -9999em;
+  line-height: normal; }
+
+.xterm {
+  cursor: text; }
+
+.xterm.enable-mouse-events {
+  /* When mouse events are enabled (eg. tmux), revert to the standard pointer cursor */
+  cursor: default; }
+
+.xterm.xterm-cursor-pointer {
+  cursor: pointer; }
+
+.xterm .xterm-accessibility,
+.xterm .xterm-message {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 100;
+  color: transparent; }
+
+.xterm .live-region {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden; }
+</style><link rel="stylesheet" href="blob:https://algoritmosempython.com.br/7d42d091-5399-444c-9de5-f8398ddc3038"><style type="text/css">@import url(https://fonts.googleapis.com/css?family=Lato:400,400i,700);</style><link rel="stylesheet" href="blob:https://algoritmosempython.com.br/2323f1c5-71b6-42d2-84c4-8867a775161d"><link rel="stylesheet" href="blob:https://algoritmosempython.com.br/ce4f6b61-0871-4b8e-9429-d8487bae72ae"><style type="text/css">.lm_root {
+  position: relative; }
+
+.lm_row > .lm_item {
+  float: left; }
+
+.lm_content {
+  overflow: hidden;
+  position: relative; }
+
+.lm_dragging,
+.lm_dragging * {
+  cursor: move !important;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none; }
+
+.lm_maximised {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 40; }
+
+.lm_maximise_placeholder {
+  display: none; }
+
+.lm_splitter {
+  position: relative;
+  z-index: 20; }
+
+.lm_splitter:hover,
+.lm_splitter.lm_dragging {
+  background: orange; }
+
+.lm_splitter.lm_vertical .lm_drag_handle {
+  position: absolute;
+  height: 25px;
+  top: -10px;
+  cursor: n-resize;
+  width: 100%; }
+
+.lm_splitter.lm_horizontal {
+  height: 100%;
+  float: left; }
+
+.lm_splitter.lm_horizontal .lm_drag_handle {
+  position: absolute;
+  width: 25px;
+  left: -10px;
+  cursor: e-resize;
+  height: 100%; }
+
+.lm_header {
+  position: relative;
+  overflow: visible; }
+
+.lm_header [class^="lm_"] {
+  box-sizing: content-box !important; }
+
+.lm_header > ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0; }
+
+.lm_header .lm_controls {
+  right: 3px;
+  position: absolute; }
+
+.lm_header .lm_controls > li {
+  width: 18px;
+  height: 18px;
+  float: left;
+  text-align: center;
+  cursor: pointer; }
+
+.lm_header .lm_tabs {
+  position: absolute; }
+
+.lm_header .lm_tab {
+  display: block;
+  float: left;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 0;
+  padding-bottom: 0;
+  height: 30px;
+  line-height: 100%;
+  margin-top: 1px;
+  cursor: pointer;
+  position: relative;
+  padding-right: 25px; }
+
+.lm_header .lm_tab i {
+  height: 19px;
+  width: 2px;
+  position: absolute; }
+
+.lm_header .lm_tab i.lm_left {
+  left: -2px;
+  top: 0; }
+
+.lm_header .lm_tab i.lm_right {
+  right: -2px;
+  top: 0; }
+
+.lm_header .lm_tab .lm_title {
+  text-overflow: ellipsis;
+  display: inline-block;
+  overflow: hidden; }
+
+.lm_header .lm_tab .lm_close_tab {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 14px;
+  height: 14px;
+  text-align: center; }
+
+.lm_drop_tab_placeholder {
+  width: 100px;
+  height: 10px;
+  float: left;
+  visibility: hidden; }
+
+.lm_header .lm_controls .lm_tabdropdown::before {
+  color: black;
+  content: "";
+  width: 0;
+  height: 0;
+  vertical-align: middle;
+  display: inline-block;
+  border-top: 5px dashed;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent; }
+
+.lm_header .lm_tabdropdown_list {
+  position: absolute;
+  top: 20px;
+  right: 0;
+  z-index: 1; }
+
+.lm_header .lm_tabdropdown_list .lm_tab {
+  clear: both;
+  padding-right: 10px; }
+
+.lm_header .lm_tabdropdown_list .lm_tab .lm_title {
+  width: 100px; }
+
+.lm_header .lm_tabdropdown_list .lm_close_tab {
+  display: none !important; }
+
+/***********************************
+ * Drag Proxy
+ ***********************************/
+.lm_dragProxy {
+  position: absolute;
+  z-index: 30;
+  top: 0;
+  left: 0; }
+
+.lm_dragProxy .lm_header {
+  background: transparent; }
+
+.lm_dragProxy .lm_content {
+  border-top: none;
+  overflow: hidden; }
+
+.lm_dropTargetIndicator {
+  position: absolute;
+  z-index: 20;
+  display: none;
+  box-sizing: content-box; }
+
+.lm_dropTargetIndicator .lm_inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0; }
+
+.lm_transition_indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  width: 20px;
+  height: 20px;
+  z-index: 20; }
+
+.lm_popin {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  z-index: 9999;
+  bottom: 0;
+  right: 0; }
+
+.lm_popin > * {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%; }
+
+.lm_popin > .lm_bg {
+  z-index: 10; }
+
+.lm_popin > .lm_icon {
+  z-index: 20; }
+</style><style type="text/css">.lm_goldenlayout {
+  background: white; }
+
+.lm_content {
+  background: #fff; }
+
+.lm_dragProxy .lm_content {
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box; }
+
+.lm_dropTargetIndicator {
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.4);
+  outline: 1px dashed rgba(0, 0, 0, 0.2);
+  margin: -1px;
+  transition: all 200ms ease; }
+
+.lm_dropTargetIndicator .lm_inner {
+  background: #000;
+  opacity: 0.1;
+  filter: alpha(opacity=1); }
+
+.lm_splitter {
+  background: #ebf4f7;
+  transition: opacity 200ms ease;
+  z-index: 100; }
+
+.lm_splitter:hover {
+  background: #bfcdd2; }
+
+.lm_header {
+  height: 30px;
+  background-color: #ebf4f7; }
+
+.lm_header.lm_selectable {
+  cursor: pointer; }
+
+.lm_selected .lm_header {
+  background-color: #452500; }
+
+.lm_maximised .lm_header {
+  background-color: #fff; }
+
+.lm_header .lm_tab {
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+  padding-top: 0;
+  padding-bottom: 0;
+  height: 30px;
+  background: #ebf4f7;
+  margin-top: 0;
+  color: rgba(86, 94, 101, 0.5);
+  font-weight: 400; }
+
+.lm_header .lm_tab .lm_title {
+  font-size: 0.9rem;
+  line-height: 30px; }
+
+.lm_tab.lm_active,
+.lm_tab:hover {
+  color: #777;
+  background: #ebf4f7; }
+
+.lm_header .lm_tab.lm_active {
+  border-bottom: none;
+  color: #3a3a3a;
+  background-color: #fff; }
+
+.lm_header .lm_tab .lm_close_tab {
+  background-position: center center;
+  background-repeat: no-repeat;
+  opacity: 0.4;
+  filter: alpha(opacity=40);
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAIklEQVR4nGNgYGD4z4Ad/Mdg4ODDBXCZRFgCp5EEHQMXBwAQAgz0SVCcggAAAABJRU5ErkJggg==); }
+
+.lm_header .lm_tab .lm_close_tab {
+  width: 11px;
+  height: 11px;
+  right: 6px;
+  top: 4px;
+  background-repeat: no-repeat; }
+
+.lm_header .lm_tab .lm_close_tab:hover,
+.lm_header .lm_tab.lm_active .lm_close_tab {
+  opacity: 1;
+  filter: alpha(opacity=100); }
+
+.lm_controls > li {
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: relative;
+  opacity: 0.4;
+  transition: opacity 300ms ease; }
+
+.lm_controls > li:hover {
+  opacity: 1;
+  filter: alpha(opacity=100); }
+
+.lm_controls .lm_popout {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAANUlEQVR4nI2QMQoAMAwCz5L/f9mOzZIaN0E9UDyZhaaQz6atgBHgambEJ5wBKoS0WaIvfT+6k2miecn19maaaaaasuvork5cyii=); }
+
+.lm_controls .lm_maximise {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAIklEQVR4nGNkYGD4z0AAMBFSAAOETPpPlEmDUREjAxHhBABPvAQLFv3qngAAAABJRU5ErkJggg==); }
+
+.lm_maximised .lm_controls .lm_maximise {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAJklEQVR4nGP8//8/AyHARFDFUFbEwsDAwMDIyIgzHP7//89IlEkApSkHEScJTKoAAAAASUVORK5CYII=); }
+
+.lm_controls .lm_close {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAKUlEQVR4nGNgYGD4z4Af/Mdg4FKASwCnDf8JKSBoAtEmEXQTQd8RDCcA6+4q8ovigasaaaaasuvork5cyii=); }
+
+.lm_transition_indicator {
+  background-color: #000;
+  border: 1px dashed #555; }
+
+.lm_popin {
+  cursor: pointer; }
+
+.lm_popin .lm_bg {
+  background: #000;
+  opacity: 0.7; }
+
+.lm_popin .lm_icon {
+  background-position: center center;
+  background-repeat: no-repeat;
+  opacity: 0.7;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAJCAYAAADpeqZqAAAAWklEQVR4nJWOyw3AIAxDHcQC7L8jbwT3AlJBfNp3SiI7dtRaLSlKKeoA1oEsKSQZCEluexw8Tm3ohk+E7bnOUHUGcNh+HwbBygw4AZ7FN/Lt84p0l+yTflV8AKQyLdcCRJi/AAAAAElFTkSuQmCC); }
+
+.lm_popin:hover .lm_icon {
+  opacity: 1; }
+
+.lm_splitter.lm_horizontal .lm_drag_handle {
+  cursor: ew-resize; }
+
+.lm_splitter.lm_vertical .lm_drag_handle {
+  cursor: ns-resize; }
+</style><style type="text/css">.lm_header .lm_tabs {
+  display: flex;
+  width: 100%;
+  overflow-x: scroll;
+  padding-bottom: 30px; }
+
+.lm_header {
+  overflow: hidden !important; }
+</style><style type="text/css">
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style><style type="text/css">.MathJax_Display {text-align: center; margin: 1em 0em; position: relative; display: block!important; text-indent: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; width: 100%}
+.MathJax .merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MathJax .MJX-monospace {font-family: monospace}
+.MathJax .MJX-sans-serif {font-family: sans-serif}
+#MathJax_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true'); padding: 3px 4px; z-index: 401; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none}
+.MathJax {display: inline; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; padding: 0; margin: 0}
+.MathJax:focus, body :focus .MathJax {display: inline-table}
+.MathJax.MathJax_FullWidth {text-align: center; display: table-cell!important; width: 10000em!important}
+.MathJax img, .MathJax nobr, .MathJax a {border: 0; padding: 0; margin: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+img.MathJax_strut {border: 0!important; padding: 0!important; margin: 0!important; vertical-align: 0!important}
+.MathJax span {display: inline; position: static; border: 0; padding: 0; margin: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+.MathJax nobr {white-space: nowrap!important}
+.MathJax img {display: inline!important; float: none!important}
+.MathJax * {transition: none; -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none}
+.MathJax_Processing {visibility: hidden; position: fixed; width: 0; height: 0; overflow: hidden}
+.MathJax_Processed {display: none!important}
+.MathJax_ExBox {display: block!important; overflow: hidden; width: 1px; height: 60ex; min-height: 0; max-height: none}
+.MathJax .MathJax_EmBox {display: block!important; overflow: hidden; width: 1px; height: 60em; min-height: 0; max-height: none}
+.MathJax_LineBox {display: table!important}
+.MathJax_LineBox span {display: table-cell!important; width: 10000em!important; min-width: 0; max-width: none; padding: 0; border: 0; margin: 0}
+.MathJax .MathJax_HitBox {cursor: text; background: white; opacity: 0; filter: alpha(opacity=0)}
+.MathJax .MathJax_HitBox * {filter: none; opacity: 1; background: transparent}
+#MathJax_Tooltip * {filter: none; opacity: 1; background: transparent}
+@font-face {font-family: MathJax_Blank; src: url('about:blank')}
+.MathJax .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style><style id="ace-crimson-editor">.ace-crimson-editor .ace_gutter {background: #ebebeb;color: #333;overflow : hidden;}.ace-crimson-editor .ace_gutter-layer {width: 100%;text-align: right;}.ace-crimson-editor .ace_print-margin {width: 1px;background: #e8e8e8;}.ace-crimson-editor {background-color: #FFFFFF;color: rgb(64, 64, 64);}.ace-crimson-editor .ace_cursor {color: black;}.ace-crimson-editor .ace_invisible {color: rgb(191, 191, 191);}.ace-crimson-editor .ace_identifier {color: black;}.ace-crimson-editor .ace_keyword {color: blue;}.ace-crimson-editor .ace_constant.ace_buildin {color: rgb(88, 72, 246);}.ace-crimson-editor .ace_constant.ace_language {color: rgb(255, 156, 0);}.ace-crimson-editor .ace_constant.ace_library {color: rgb(6, 150, 14);}.ace-crimson-editor .ace_invalid {text-decoration: line-through;color: rgb(224, 0, 0);}.ace-crimson-editor .ace_fold {}.ace-crimson-editor .ace_support.ace_function {color: rgb(192, 0, 0);}.ace-crimson-editor .ace_support.ace_constant {color: rgb(6, 150, 14);}.ace-crimson-editor .ace_support.ace_type,.ace-crimson-editor .ace_support.ace_class {color: rgb(109, 121, 222);}.ace-crimson-editor .ace_keyword.ace_operator {color: rgb(49, 132, 149);}.ace-crimson-editor .ace_string {color: rgb(128, 0, 128);}.ace-crimson-editor .ace_comment {color: rgb(76, 136, 107);}.ace-crimson-editor .ace_comment.ace_doc {color: rgb(0, 102, 255);}.ace-crimson-editor .ace_comment.ace_doc.ace_tag {color: rgb(128, 159, 191);}.ace-crimson-editor .ace_constant.ace_numeric {color: rgb(0, 0, 64);}.ace-crimson-editor .ace_variable {color: rgb(0, 64, 128);}.ace-crimson-editor .ace_xml-pe {color: rgb(104, 104, 91);}.ace-crimson-editor .ace_marker-layer .ace_selection {background: rgb(181, 213, 255);}.ace-crimson-editor .ace_marker-layer .ace_step {background: rgb(252, 255, 0);}.ace-crimson-editor .ace_marker-layer .ace_stack {background: rgb(164, 229, 101);}.ace-crimson-editor .ace_marker-layer .ace_bracket {margin: -1px 0 0 -1px;border: 1px solid rgb(192, 192, 192);}.ace-crimson-editor .ace_marker-layer .ace_active-line {background: rgb(232, 242, 254);}.ace-crimson-editor .ace_gutter-active-line {background-color : #dcdcdc;}.ace-crimson-editor .ace_meta.ace_tag {color:rgb(28, 2, 255);}.ace-crimson-editor .ace_marker-layer .ace_selected-word {background: rgb(250, 250, 255);border: 1px solid rgb(200, 200, 250);}.ace-crimson-editor .ace_string.ace_regex {color: rgb(192, 0, 192);}.ace-crimson-editor .ace_indent-guide {background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==") right repeat-y;}
+/*# sourceURL=ace/css/ace-crimson-editor */</style></head><body><div style="visibility: hidden; overflow: hidden; position: absolute; top: 0px; height: 1px; width: auto; padding: 0px; border: 0px none; margin: 0px; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal;"><div id="MathJax_Hidden"></div></div><div id="MathJax_Message" style="display: none;"></div>
+        <div class="content"><header>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="https://algoritmosempython.com.br/" style="font-family: 'Gochi Hand', cursive; font-size: 150% !important;">AP
+				
+			  </a>
+			<div class="navbar-right">
+				
+				<a href="https://algoritmosempython.com.br/video-aulas/">Vídeo Aulas</a>
+				
+				<a href="https://algoritmosempython.com.br/sobre/">Sobre</a>
+				
+			</div>
+		</div>
+	</nav>
+</header>
+<main>
+	<article>
+		<section class="body">
+			<br>
+			<div class="sect1">
+<h2 id="_representação_de_grafos">Representação de Grafos</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Na seção anterior, vimos os conceitos principais sobre grafos e 
+aprendemos como eles podem ser visualizados. Nesta seção veremos como 
+eles podem ser representados em um programa de computador.</p>
+</div>
+<div class="paragraph">
+<p>A melhor representação para um grafo depende do que desejamos fazer 
+com ele e do quão denso ou esparso ele é. Grafos esparsos são grafos que
+ possuem um pequeno número de arestas em relação ao número de vértices, 
+ao passo que em grafos densos o número de arestas se aproxima do máximo 
+de arestas possível.</p>
+</div>
+<div class="paragraph">
+<p>Existem duas representações principais para grafos. A primeira é chamada <strong>matriz de adjacências</strong>, que nada mais é do que uma matriz <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-1-Frame" tabindex="0" style="position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;M&lt;/mi&gt;&lt;/math&gt;" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-1" style="width: 1.09em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.044em; height: 0px; font-size: 104%;"><span style="position: absolute; clip: rect(1.449em, 1001.04em, 2.393em, -1000em); top: -2.262em; left: 0em;"><span class="mrow" id="MathJax-Span-2"><span class="mi" id="MathJax-Span-3" style="font-family: MathJax_Math; font-style: italic;">M<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.081em;"></span></span></span><span style="display: inline-block; width: 0px; height: 2.262em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.045em; border-left: 0px solid; width: 0px; height: 0.801em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>M</mi></math></span></span><script type="math/tex" id="MathJax-Element-1">M</script> de <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-2-Frame" tabindex="0" style="position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-4" style="width: 0.655em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.609em; height: 0px; font-size: 104%;"><span style="position: absolute; clip: rect(1.69em, 1000.59em, 2.404em, -1000em); top: -2.262em; left: 0em;"><span class="mrow" id="MathJax-Span-5"><span class="mi" id="MathJax-Span-6" style="font-family: MathJax_Math; font-style: italic;">n</span></span><span style="display: inline-block; width: 0px; height: 2.262em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.057em; border-left: 0px solid; width: 0px; height: 0.562em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi></math></span></span><script type="math/tex" id="MathJax-Element-2">n</script> linhas e <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-3-Frame" tabindex="0" style="position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-7" style="width: 0.655em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.609em; height: 0px; font-size: 104%;"><span style="position: absolute; clip: rect(1.69em, 1000.59em, 2.404em, -1000em); top: -2.262em; left: 0em;"><span class="mrow" id="MathJax-Span-8"><span class="mi" id="MathJax-Span-9" style="font-family: MathJax_Math; font-style: italic;">n</span></span><span style="display: inline-block; width: 0px; height: 2.262em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.057em; border-left: 0px solid; width: 0px; height: 0.562em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi></math></span></span><script type="math/tex" id="MathJax-Element-3">n</script> colunas em que <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-4-Frame" tabindex="0" style="position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;M&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;[&lt;/mo&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;mi&gt;j&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;]&lt;/mo&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/math&gt;" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-10" style="width: 4.875em; display: inline-block;"><span style="display: inline-block; position: relative; width: 4.655em; height: 0px; font-size: 104%;"><span style="position: absolute; clip: rect(1.382em, 1004.58em, 2.643em, -1000em); top: -2.262em; left: 0em;"><span class="mrow" id="MathJax-Span-11"><span class="mi" id="MathJax-Span-12" style="font-family: MathJax_Math; font-style: italic;">M<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.081em;"></span></span><span class="mo" id="MathJax-Span-13" style="font-family: MathJax_Main;">[</span><span class="mi" id="MathJax-Span-14" style="font-family: MathJax_Math; font-style: italic;">i</span><span class="mo" id="MathJax-Span-15" style="font-family: MathJax_Main;">,</span><span class="mi" id="MathJax-Span-16" style="font-family: MathJax_Math; font-style: italic; padding-left: 0.167em;">j</span><span class="mo" id="MathJax-Span-17" style="font-family: MathJax_Main;">]</span><span class="mo" id="MathJax-Span-18" style="font-family: MathJax_Main; padding-left: 0.278em;">=</span><span class="mn" id="MathJax-Span-19" style="font-family: MathJax_Main; padding-left: 0.278em;">1</span></span><span style="display: inline-block; width: 0px; height: 2.262em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.305em; border-left: 0px solid; width: 0px; height: 1.13em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>M</mi><mo stretchy="false">[</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="false">]</mo><mo>=</mo><mn>1</mn></math></span></span><script type="math/tex" id="MathJax-Element-4">M[i, j] = 1</script> se existe uma aresta do vértice <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-5-Frame" tabindex="0" style="position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;/math&gt;" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-20" style="width: 0.394em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.348em; height: 0px; font-size: 104%;"><span style="position: absolute; clip: rect(1.471em, 1000.31em, 2.404em, -1000em); top: -2.262em; left: 0em;"><span class="mrow" id="MathJax-Span-21"><span class="mi" id="MathJax-Span-22" style="font-family: MathJax_Math; font-style: italic;">i</span></span><span style="display: inline-block; width: 0px; height: 2.262em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.057em; border-left: 0px solid; width: 0px; height: 0.789em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>i</mi></math></span></span><script type="math/tex" id="MathJax-Element-5">i</script> para o vértice <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-6-Frame" tabindex="0" style="position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;j&lt;/mi&gt;&lt;/math&gt;" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-23" style="width: 0.437em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.392em; height: 0px; font-size: 104%;"><span style="position: absolute; clip: rect(1.471em, 1000.38em, 2.597em, -1000em); top: -2.262em; left: 0em;"><span class="mrow" id="MathJax-Span-24"><span class="mi" id="MathJax-Span-25" style="font-family: MathJax_Math; font-style: italic;">j</span></span><span style="display: inline-block; width: 0px; height: 2.262em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.257em; border-left: 0px solid; width: 0px; height: 0.99em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>j</mi></math></span></span><script type="math/tex" id="MathJax-Element-6">j</script>. Lembre-se que estamos seguindo a convenção de que <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-7-Frame" tabindex="0" style="position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-26" style="width: 0.655em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.609em; height: 0px; font-size: 104%;"><span style="position: absolute; clip: rect(1.69em, 1000.59em, 2.404em, -1000em); top: -2.262em; left: 0em;"><span class="mrow" id="MathJax-Span-27"><span class="mi" id="MathJax-Span-28" style="font-family: MathJax_Math; font-style: italic;">n</span></span><span style="display: inline-block; width: 0px; height: 2.262em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.057em; border-left: 0px solid; width: 0px; height: 0.562em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi></math></span></span><script type="math/tex" id="MathJax-Element-7">n</script> representa o número de vértices do grafo.</p>
+</div>
+<div class="paragraph">
+<p>Se estivermos representando um grafo não-direcionado e existir uma aresta entre os vértices <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-8-Frame" tabindex="0" style="position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;/math&gt;" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-29" style="width: 0.394em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.348em; height: 0px; font-size: 104%;"><span style="position: absolute; clip: rect(1.471em, 1000.31em, 2.404em, -1000em); top: -2.262em; left: 0em;"><span class="mrow" id="MathJax-Span-30"><span class="mi" id="MathJax-Span-31" style="font-family: MathJax_Math; font-style: italic;">i</span></span><span style="display: inline-block; width: 0px; height: 2.262em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.057em; border-left: 0px solid; width: 0px; height: 0.789em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>i</mi></math></span></span><script type="math/tex" id="MathJax-Element-8">i</script> e <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-9-Frame" tabindex="0" style="position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;j&lt;/mi&gt;&lt;/math&gt;" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-32" style="width: 0.437em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.392em; height: 0px; font-size: 104%;"><span style="position: absolute; clip: rect(1.471em, 1000.38em, 2.597em, -1000em); top: -2.262em; left: 0em;"><span class="mrow" id="MathJax-Span-33"><span class="mi" id="MathJax-Span-34" style="font-family: MathJax_Math; font-style: italic;">j</span></span><span style="display: inline-block; width: 0px; height: 2.262em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.257em; border-left: 0px solid; width: 0px; height: 0.99em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>j</mi></math></span></span><script type="math/tex" id="MathJax-Element-9">j</script>, então teremos tanto <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-10-Frame" tabindex="0" style="position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;M&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;[&lt;/mo&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;mi&gt;j&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;]&lt;/mo&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/math&gt;" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-35" style="width: 4.875em; display: inline-block;"><span style="display: inline-block; position: relative; width: 4.655em; height: 0px; font-size: 104%;"><span style="position: absolute; clip: rect(1.382em, 1004.58em, 2.643em, -1000em); top: -2.262em; left: 0em;"><span class="mrow" id="MathJax-Span-36"><span class="mi" id="MathJax-Span-37" style="font-family: MathJax_Math; font-style: italic;">M<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.081em;"></span></span><span class="mo" id="MathJax-Span-38" style="font-family: MathJax_Main;">[</span><span class="mi" id="MathJax-Span-39" style="font-family: MathJax_Math; font-style: italic;">i</span><span class="mo" id="MathJax-Span-40" style="font-family: MathJax_Main;">,</span><span class="mi" id="MathJax-Span-41" style="font-family: MathJax_Math; font-style: italic; padding-left: 0.167em;">j</span><span class="mo" id="MathJax-Span-42" style="font-family: MathJax_Main;">]</span><span class="mo" id="MathJax-Span-43" style="font-family: MathJax_Main; padding-left: 0.278em;">=</span><span class="mn" id="MathJax-Span-44" style="font-family: MathJax_Main; padding-left: 0.278em;">1</span></span><span style="display: inline-block; width: 0px; height: 2.262em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.305em; border-left: 0px solid; width: 0px; height: 1.13em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>M</mi><mo stretchy="false">[</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="false">]</mo><mo>=</mo><mn>1</mn></math></span></span><script type="math/tex" id="MathJax-Element-10">M[i, j] = 1</script> quanto <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-11-Frame" tabindex="0" style="position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;M&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;[&lt;/mo&gt;&lt;mi&gt;j&lt;/mi&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;]&lt;/mo&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/math&gt;" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-45" style="width: 4.875em; display: inline-block;"><span style="display: inline-block; position: relative; width: 4.655em; height: 0px; font-size: 104%;"><span style="position: absolute; clip: rect(1.382em, 1004.58em, 2.643em, -1000em); top: -2.262em; left: 0em;"><span class="mrow" id="MathJax-Span-46"><span class="mi" id="MathJax-Span-47" style="font-family: MathJax_Math; font-style: italic;">M<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.081em;"></span></span><span class="mo" id="MathJax-Span-48" style="font-family: MathJax_Main;">[</span><span class="mi" id="MathJax-Span-49" style="font-family: MathJax_Math; font-style: italic;">j</span><span class="mo" id="MathJax-Span-50" style="font-family: MathJax_Main;">,</span><span class="mi" id="MathJax-Span-51" style="font-family: MathJax_Math; font-style: italic; padding-left: 0.167em;">i</span><span class="mo" id="MathJax-Span-52" style="font-family: MathJax_Main;">]</span><span class="mo" id="MathJax-Span-53" style="font-family: MathJax_Main; padding-left: 0.278em;">=</span><span class="mn" id="MathJax-Span-54" style="font-family: MathJax_Main; padding-left: 0.278em;">1</span></span><span style="display: inline-block; width: 0px; height: 2.262em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.305em; border-left: 0px solid; width: 0px; height: 1.13em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>M</mi><mo stretchy="false">[</mo><mi>j</mi><mo>,</mo><mi>i</mi><mo stretchy="false">]</mo><mo>=</mo><mn>1</mn></math></span></span><script type="math/tex" id="MathJax-Element-11">M[j, i] = 1</script>. Em outras palavras, a matriz de adjacências <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-12-Frame" tabindex="0" style="position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;M&lt;/mi&gt;&lt;/math&gt;" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-55" style="width: 1.09em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.044em; height: 0px; font-size: 104%;"><span style="position: absolute; clip: rect(1.449em, 1001.04em, 2.393em, -1000em); top: -2.262em; left: 0em;"><span class="mrow" id="MathJax-Span-56"><span class="mi" id="MathJax-Span-57" style="font-family: MathJax_Math; font-style: italic;">M<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.081em;"></span></span></span><span style="display: inline-block; width: 0px; height: 2.262em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.045em; border-left: 0px solid; width: 0px; height: 0.801em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>M</mi></math></span></span><script type="math/tex" id="MathJax-Element-12">M</script> que representa um grafo não-direcionado é <a href="https://pt.wikipedia.org/wiki/Matriz_sim%C3%A9trica">simétrica</a>. Nessa representação, o tempo gasto para determinar se um vértice <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-13-Frame" tabindex="0" style="position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;u&lt;/mi&gt;&lt;/math&gt;" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-58" style="width: 0.611em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.566em; height: 0px; font-size: 104%;"><span style="position: absolute; clip: rect(1.69em, 1000.55em, 2.404em, -1000em); top: -2.262em; left: 0em;"><span class="mrow" id="MathJax-Span-59"><span class="mi" id="MathJax-Span-60" style="font-family: MathJax_Math; font-style: italic;">u</span></span><span style="display: inline-block; width: 0px; height: 2.262em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.057em; border-left: 0px solid; width: 0px; height: 0.562em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>u</mi></math></span></span><script type="math/tex" id="MathJax-Element-13">u</script> é vizinho de um vértice <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-14-Frame" tabindex="0" style="position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;v&lt;/mi&gt;&lt;/math&gt;" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-61" style="width: 0.524em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.479em; height: 0px; font-size: 104%;"><span style="position: absolute; clip: rect(1.689em, 1000.46em, 2.404em, -1000em); top: -2.262em; left: 0em;"><span class="mrow" id="MathJax-Span-62"><span class="mi" id="MathJax-Span-63" style="font-family: MathJax_Math; font-style: italic;">v</span></span><span style="display: inline-block; width: 0px; height: 2.262em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.057em; border-left: 0px solid; width: 0px; height: 0.563em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>v</mi></math></span></span><script type="math/tex" id="MathJax-Element-14">v</script> é constante, pois basta verificarmos se <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-15-Frame" tabindex="0" style="position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;M&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;[&lt;/mo&gt;&lt;mi&gt;u&lt;/mi&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;mi&gt;v&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;]&lt;/mo&gt;&lt;/math&gt;" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-64" style="width: 3.222em; display: inline-block;"><span style="display: inline-block; position: relative; width: 3.089em; height: 0px; font-size: 104%;"><span style="position: absolute; clip: rect(1.382em, 1002.97em, 2.643em, -1000em); top: -2.262em; left: 0em;"><span class="mrow" id="MathJax-Span-65"><span class="mi" id="MathJax-Span-66" style="font-family: MathJax_Math; font-style: italic;">M<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.081em;"></span></span><span class="mo" id="MathJax-Span-67" style="font-family: MathJax_Main;">[</span><span class="mi" id="MathJax-Span-68" style="font-family: MathJax_Math; font-style: italic;">u</span><span class="mo" id="MathJax-Span-69" style="font-family: MathJax_Main;">,</span><span class="mi" id="MathJax-Span-70" style="font-family: MathJax_Math; font-style: italic; padding-left: 0.167em;">v</span><span class="mo" id="MathJax-Span-71" style="font-family: MathJax_Main;">]</span></span><span style="display: inline-block; width: 0px; height: 2.262em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.305em; border-left: 0px solid; width: 0px; height: 1.13em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>M</mi><mo stretchy="false">[</mo><mi>u</mi><mo>,</mo><mi>v</mi><mo stretchy="false">]</mo></math></span></span><script type="math/tex" id="MathJax-Element-15">M[u, v]</script> é igual a <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-16-Frame" tabindex="0" style="position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/math&gt;" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-72" style="width: 0.524em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.479em; height: 0px; font-size: 104%;"><span style="position: absolute; clip: rect(1.422em, 1000.41em, 2.349em, -1000em); top: -2.219em; left: 0em;"><span class="mrow" id="MathJax-Span-73"><span class="mn" id="MathJax-Span-74" style="font-family: MathJax_Main;">1</span></span><span style="display: inline-block; width: 0px; height: 2.219em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.045em; border-left: 0px solid; width: 0px; height: 0.783em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>1</mn></math></span></span><script type="math/tex" id="MathJax-Element-16">1</script>.</p>
+</div>
+<div class="paragraph">
+<p>Vejamos um exemplo de grafo e sua matriz de adjacências.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="Representando%20Grafos%20em%20Python%20-%20Algoritmos%20em%20Python_arquivos/GrafoMatrizAdjacencia.png" alt="Exemplo Grafo" width="500" height="400">
+</div>
+</div>
+<div class="paragraph">
+<p>A segunda representação é chamada <strong>lista de adjacências</strong>, e consiste de um arranjo (ou lista) <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-17-Frame" tabindex="0" style="position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;A&lt;/mi&gt;&lt;/math&gt;" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-75" style="width: 0.785em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.74em; height: 0px; font-size: 104%;"><span style="position: absolute; clip: rect(1.416em, 1000.72em, 2.393em, -1000em); top: -2.262em; left: 0em;"><span class="mrow" id="MathJax-Span-76"><span class="mi" id="MathJax-Span-77" style="font-family: MathJax_Math; font-style: italic;">A</span></span><span style="display: inline-block; width: 0px; height: 2.262em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.045em; border-left: 0px solid; width: 0px; height: 0.835em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>A</mi></math></span></span><script type="math/tex" id="MathJax-Element-17">A</script> com <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-18-Frame" tabindex="0" style="position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-78" style="width: 0.655em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.609em; height: 0px; font-size: 104%;"><span style="position: absolute; clip: rect(1.69em, 1000.59em, 2.404em, -1000em); top: -2.262em; left: 0em;"><span class="mrow" id="MathJax-Span-79"><span class="mi" id="MathJax-Span-80" style="font-family: MathJax_Math; font-style: italic;">n</span></span><span style="display: inline-block; width: 0px; height: 2.262em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.057em; border-left: 0px solid; width: 0px; height: 0.562em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi></math></span></span><script type="math/tex" id="MathJax-Element-18">n</script> nodos em que <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-19-Frame" tabindex="0" style="position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;A&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;[&lt;/mo&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;]&lt;/mo&gt;&lt;/math&gt;" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-81" style="width: 1.743em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.653em; height: 0px; font-size: 104%;"><span style="position: absolute; clip: rect(1.382em, 1001.53em, 2.643em, -1000em); top: -2.262em; left: 0em;"><span class="mrow" id="MathJax-Span-82"><span class="mi" id="MathJax-Span-83" style="font-family: MathJax_Math; font-style: italic;">A</span><span class="mo" id="MathJax-Span-84" style="font-family: MathJax_Main;">[</span><span class="mi" id="MathJax-Span-85" style="font-family: MathJax_Math; font-style: italic;">i</span><span class="mo" id="MathJax-Span-86" style="font-family: MathJax_Main;">]</span></span><span style="display: inline-block; width: 0px; height: 2.262em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.305em; border-left: 0px solid; width: 0px; height: 1.13em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>A</mi><mo stretchy="false">[</mo><mi>i</mi><mo stretchy="false">]</mo></math></span></span><script type="math/tex" id="MathJax-Element-19">A[i]</script> contém a lista de vizinhos do vértice <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-20-Frame" tabindex="0" style="position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;/math&gt;" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-87" style="width: 0.394em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.348em; height: 0px; font-size: 104%;"><span style="position: absolute; clip: rect(1.471em, 1000.31em, 2.404em, -1000em); top: -2.262em; left: 0em;"><span class="mrow" id="MathJax-Span-88"><span class="mi" id="MathJax-Span-89" style="font-family: MathJax_Math; font-style: italic;">i</span></span><span style="display: inline-block; width: 0px; height: 2.262em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.057em; border-left: 0px solid; width: 0px; height: 0.789em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>i</mi></math></span></span><script type="math/tex" id="MathJax-Element-20">i</script>. Se o grafo for direcionado, os vizinhos de um vértice <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-21-Frame" tabindex="0" style="position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;v&lt;/mi&gt;&lt;/math&gt;" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-90" style="width: 0.524em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.479em; height: 0px; font-size: 104%;"><span style="position: absolute; clip: rect(1.689em, 1000.46em, 2.404em, -1000em); top: -2.262em; left: 0em;"><span class="mrow" id="MathJax-Span-91"><span class="mi" id="MathJax-Span-92" style="font-family: MathJax_Math; font-style: italic;">v</span></span><span style="display: inline-block; width: 0px; height: 2.262em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.057em; border-left: 0px solid; width: 0px; height: 0.563em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>v</mi></math></span></span><script type="math/tex" id="MathJax-Element-21">v</script> serão somente aqueles vértices para os quais existe uma aresta saindo de <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-22-Frame" tabindex="0" style="position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;v&lt;/mi&gt;&lt;/math&gt;" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-93" style="width: 0.524em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.479em; height: 0px; font-size: 104%;"><span style="position: absolute; clip: rect(1.689em, 1000.46em, 2.404em, -1000em); top: -2.262em; left: 0em;"><span class="mrow" id="MathJax-Span-94"><span class="mi" id="MathJax-Span-95" style="font-family: MathJax_Math; font-style: italic;">v</span></span><span style="display: inline-block; width: 0px; height: 2.262em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.057em; border-left: 0px solid; width: 0px; height: 0.563em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>v</mi></math></span></span><script type="math/tex" id="MathJax-Element-22">v</script>. Nessa representação, o tempo gasto para determinar se um vértice <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-23-Frame" tabindex="0" style="position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;u&lt;/mi&gt;&lt;/math&gt;" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-96" style="width: 0.611em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.566em; height: 0px; font-size: 104%;"><span style="position: absolute; clip: rect(1.69em, 1000.55em, 2.404em, -1000em); top: -2.262em; left: 0em;"><span class="mrow" id="MathJax-Span-97"><span class="mi" id="MathJax-Span-98" style="font-family: MathJax_Math; font-style: italic;">u</span></span><span style="display: inline-block; width: 0px; height: 2.262em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.057em; border-left: 0px solid; width: 0px; height: 0.562em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>u</mi></math></span></span><script type="math/tex" id="MathJax-Element-23">u</script> é vizinho de um vértice <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-24-Frame" tabindex="0" style="position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;v&lt;/mi&gt;&lt;/math&gt;" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-99" style="width: 0.524em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.479em; height: 0px; font-size: 104%;"><span style="position: absolute; clip: rect(1.689em, 1000.46em, 2.404em, -1000em); top: -2.262em; left: 0em;"><span class="mrow" id="MathJax-Span-100"><span class="mi" id="MathJax-Span-101" style="font-family: MathJax_Math; font-style: italic;">v</span></span><span style="display: inline-block; width: 0px; height: 2.262em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.057em; border-left: 0px solid; width: 0px; height: 0.563em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>v</mi></math></span></span><script type="math/tex" id="MathJax-Element-24">v</script> é proporcional ao grau de saída do vértice <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-25-Frame" tabindex="0" style="position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;v&lt;/mi&gt;&lt;/math&gt;" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-102" style="width: 0.524em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.479em; height: 0px; font-size: 104%;"><span style="position: absolute; clip: rect(1.689em, 1000.46em, 2.404em, -1000em); top: -2.262em; left: 0em;"><span class="mrow" id="MathJax-Span-103"><span class="mi" id="MathJax-Span-104" style="font-family: MathJax_Math; font-style: italic;">v</span></span><span style="display: inline-block; width: 0px; height: 2.262em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.057em; border-left: 0px solid; width: 0px; height: 0.563em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>v</mi></math></span></span><script type="math/tex" id="MathJax-Element-25">v</script>, ou seja, ao número de arestas que saem de <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-26-Frame" tabindex="0" style="position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;v&lt;/mi&gt;&lt;/math&gt;" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-105" style="width: 0.524em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.479em; height: 0px; font-size: 104%;"><span style="position: absolute; clip: rect(1.689em, 1000.46em, 2.404em, -1000em); top: -2.262em; left: 0em;"><span class="mrow" id="MathJax-Span-106"><span class="mi" id="MathJax-Span-107" style="font-family: MathJax_Math; font-style: italic;">v</span></span><span style="display: inline-block; width: 0px; height: 2.262em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.057em; border-left: 0px solid; width: 0px; height: 0.563em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>v</mi></math></span></span><script type="math/tex" id="MathJax-Element-26">v</script>.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="Representando%20Grafos%20em%20Python%20-%20Algoritmos%20em%20Python_arquivos/GrafoListaAdjacencia.png" alt="Exemplo Grafo" width="500" height="400">
+</div>
+</div>
+<div class="paragraph">
+<p>Se o grafo a ser representado for relativamente esparso, a lista de 
+adjacências oferecerá uma representação mais compacta (econômica) do 
+grafo porque ela conterá somente as conexões existentes entre vértices.</p>
+</div>
+<div class="sect2">
+<h3 id="_representando_grafos_em_python">Representando Grafos em Python</h3>
+<div class="paragraph">
+<p>Como listas de adjacência são a forma mais comum de se representar 
+grafos, nosso foco nesta seção será em como implementar um grafo em 
+Python usando essa estrutura de dados.</p>
+</div>
+<div class="paragraph">
+<p>Nesta seção veremos duas formas simples de representar listas de adjacência em Python. Uma delas, que chamamos de <em>representação explícita</em>, armazena os nomes dos vértices no próprio grafo. A outra, chamada <em>representação implícita</em>, assume que cada vértice possui um identificador inteiro, e faz referência aos vértices por meio desse identificador.</p>
+</div>
+<div class="paragraph">
+<p>Antes de discutirmos as formas de representar grafos, convém 
+esclarecermos como montamos o grafo em si. Em nossos exemplos, 
+assumiremos que nos será fornecida uma lista com as ligações entre 
+vértices (uma lista de arestas), a partir da qual criaremos os vértices e
+ as arestas que os conectam. Nos exemplos abaixo, trabalharemos com a 
+seguinte lista de arestas:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>A B
+B C
+B D
+C B
+C E
+D A
+E B</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Na lista acima, existe uma aresta saindo do vértice à esquerda e chegando no vértice à direita. Por exemplo, a aresta <code>A B</code> significa que existe uma aresta saindo do vértice <code>A</code> e chegando no vértice <code>B</code>.</p>
+</div>
+<div class="paragraph">
+<p>Vejamos como representar o grafo descrito pela lista de arestas acima.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_representação_explícita">Representação Explícita</h3>
+<div class="paragraph">
+<p>De uma forma bem simples, podemos representar um grafo em Python assim:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">grafo = { <span class="hljs-string">"A"</span> : [<span class="hljs-string">"B"</span>],
+          <span class="hljs-string">"B"</span> : [<span class="hljs-string">"C"</span>, <span class="hljs-string">"D"</span>],
+          <span class="hljs-string">"C"</span> : [<span class="hljs-string">"B"</span>, <span class="hljs-string">"E"</span>],
+          <span class="hljs-string">"D"</span> : [<span class="hljs-string">"A"</span>],
+          <span class="hljs-string">"E"</span> : [<span class="hljs-string">"B"</span>]
+        }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>O código acima representa o grafo como um dicionário de listas. Ele nos diz que existe uma aresta do vértice <code>A</code> para o vértice <code>B</code>, uma aresta do vértice <code>B</code> para os vértices <code>C</code> e <code>D</code>, e assim por diante. A figura abaixo mostra o grafo representado pelo código acima.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="Representando%20Grafos%20em%20Python%20-%20Algoritmos%20em%20Python_arquivos/ExemploGrafoExplicito.png" alt="Exemplo Grafo" width="200" height="200">
+</div>
+</div>
+<div class="paragraph">
+<p>O interessante de se usar um dicionário para representar o grafo é a 
+conveniência que isso proporciona. As chaves do dicionário são os 
+vértices e os valores são as listas de adjacências. Para iterar sobre 
+cada vértice <code>v</code> de um grafo <code>G</code>, precisamos simplesmente fazer <code>for v in G</code>. E para iterar sobre os vizinhos de um vértice <code>v</code>, basta fazer <code>for u in G[v]</code>.</p>
+</div>
+<div class="paragraph">
+<p>Outra alternativa é representar o grafo como um dicionário de 
+conjuntos. Na prática, muito pouca coisa muda em relação à representação
+ acima, mas se usarmos um conjunto em vez de uma lista garantimos que 
+não existirão arestas duplicadas entre dois nodos – algo que assumimos 
+para todos os grafos com que trabalharemos nos exemplos.</p>
+</div>
+<div class="paragraph">
+<p>Antes de avançarmos, é <strong>muito importante</strong> mencionar 
+que se você precisa criar e manipular um grafo em Python de forma 
+simples e rápida, a forma mostrada acima é provavelmente sua melhor 
+opção. A maioria dos algoritmos em grafos pode ser implementada usando 
+essa estrutura como base. Ela também é provavelmente a melhor opção caso
+ você não precise fazer nada muito sofisticado (como ter programas 
+externos acessando sua implementação de grafo, por exemplo). Nas seções 
+seguintes, trabalharemos com essa implementação simples de grafo.</p>
+</div>
+<div class="paragraph">
+<p>Porém, se você deseja algo mais elaborado, você pode criar uma classe para representar seu grafo, como explicamos a seguir.</p>
+</div>
+<div class="sect3">
+<h4 id="_criando_uma_classe_para_representar_grafos_em_python">Criando uma Classe para Representar Grafos em Python</h4>
+<div class="paragraph">
+<p>Dado um grafo qualquer, precisamos realizar operações sobre ele. As 
+operações mais comuns são obter a lista de vértices do grafo, obter a 
+lista de arestas, verificar se existe uma aresta entre dois vértices, 
+adicionar uma aresta entre dois vértices, etc. No exemplo abaixo, 
+criamos uma classe <code>Grafo</code> na qual implementamos essas e outras operações.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python"><span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> defaultdict
+
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Grafo</span>(<span class="hljs-params">object</span>):</span>
+    <span class="hljs-string">""" Implementação básica de um grafo. """</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, arestas, direcionado=False</span>):</span>
+        <span class="hljs-string">"""Inicializa as estruturas base do grafo."""</span>
+        self.adj = defaultdict(set)
+        self.direcionado = direcionado
+        self.adiciona_arestas(arestas)
+
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_vertices</span>(<span class="hljs-params">self</span>):</span>
+        <span class="hljs-string">""" Retorna a lista de vértices do grafo. """</span>
+        <span class="hljs-keyword">return</span> list(self.adj.keys())
+
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_arestas</span>(<span class="hljs-params">self</span>):</span>
+        <span class="hljs-string">""" Retorna a lista de arestas do grafo. """</span>
+        <span class="hljs-keyword">return</span> [(k, v) <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> self.adj.keys() <span class="hljs-keyword">for</span> v <span class="hljs-keyword">in</span> self.adj[k]]
+
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">adiciona_arestas</span>(<span class="hljs-params">self, arestas</span>):</span>
+        <span class="hljs-string">""" Adiciona arestas ao grafo. """</span>
+        <span class="hljs-keyword">for</span> u, v <span class="hljs-keyword">in</span> arestas:
+            self.adiciona_arco(u, v)
+
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">adiciona_arco</span>(<span class="hljs-params">self, u, v</span>):</span>
+        <span class="hljs-string">""" Adiciona uma ligação (arco) entre os nodos 'u' e 'v'. """</span>
+        self.adj[u].add(v)
+        <span class="hljs-comment"># Se o grafo é não-direcionado, precisamos adicionar arcos nos dois sentidos.</span>
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> self.direcionado:
+            self.adj[v].add(u)
+
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">existe_aresta</span>(<span class="hljs-params">self, u, v</span>):</span>
+        <span class="hljs-string">""" Existe uma aresta entre os vértices 'u' e 'v'? """</span>
+        <span class="hljs-keyword">return</span> u <span class="hljs-keyword">in</span> self.adj <span class="hljs-keyword">and</span> v <span class="hljs-keyword">in</span> self.adj[u]
+
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__len__</span>(<span class="hljs-params">self</span>):</span>
+        <span class="hljs-keyword">return</span> len(self.adj)
+
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__str__</span>(<span class="hljs-params">self</span>):</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-string">'{}({})'</span>.format(self.__class__.__name__, dict(self.adj))
+
+
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__getitem__</span>(<span class="hljs-params">self, v</span>):</span>
+        <span class="hljs-keyword">return</span> self.adj[v]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alguns comentários sobre a implementação acima:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Ela nos permite criar tanto grafos direcionados quanto não direcionados, por meio do parâmetro <code>direcionado</code> usado ao criar o grafo.</p>
+</li>
+<li>
+<p>Ela assume que todas as arestas possuem peso 1, ou seja, o grafo é 
+não-ponderado. Em breve mostraremos como implementar grafos ponderados.</p>
+</li>
+<li>
+<p>Implementamos dois métodos mágicos: <code><em>len</em></code> e <code><em>str</em></code>.
+ Estes métodos são implementados para fazer com que o acesso à nossa 
+estrutura de dados seja feito como o acesso a estruturas de dados padrão
+ do Python. Por exemplo, para que sejamos capazes de obter o tamanho do 
+grafo usando <code>len(grafo)</code>, precisamos implementar o método <code><em>len</em></code>. Caso contrário, precisaríamos fazer <code>len(grafo.adj)</code>,
+ mas isso é ruim porque ao fazer isso estamos acessando a implementação 
+do grafo em si. Se essa implementação mudar no futuro (se o nome <code>adj</code>
+ mudar, por exemplo) nosso código não funcionará mais. Para prevenis 
+quanto a acessos à implementação do grafo, precisamos prover métodos 
+acessórios, como fizemos. Para que possamos fazer <code>print(grafo)</code> e obter algo legível, precisamos implementar o método <code><em>str</em></code>. E para que ao fazer <code>grafo[v]</code> obtenhamos a lista de adjacências do vértice <code>v</code>, precisamos implementar o método <code><em>getitem</em></code>. Veja mais detalhes sobre esse tipo de método <a href="https://pt.stackoverflow.com/questions/176465/m%C3%A9todos-ou-dunder-em-python-quais-s%C3%A3o-os-mais-utilizados">aqui</a>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Vejamos como criar e imprimir um grafo.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python"><span class="hljs-comment"># Cria a lista de arestas.</span>
+arestas = [(<span class="hljs-string">'A'</span>, <span class="hljs-string">'B'</span>), (<span class="hljs-string">'B'</span>, <span class="hljs-string">'C'</span>), (<span class="hljs-string">'B'</span>, <span class="hljs-string">'D'</span>), (<span class="hljs-string">'C'</span>, <span class="hljs-string">'B'</span>), (<span class="hljs-string">'C'</span>, <span class="hljs-string">'E'</span>), (<span class="hljs-string">'D'</span>, <span class="hljs-string">'A'</span>), (<span class="hljs-string">'E'</span>, <span class="hljs-string">'B'</span>)]
+
+<span class="hljs-comment"># Cria e imprime o grafo.</span>
+grafo = Grafo(arestas, direcionado=<span class="hljs-literal">True</span>)
+print(grafo.adj)</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>defaultdict(&lt;class 'set'&gt;, {'A': {'B'}, 'B': {'C', 'D'}, 'C': {'B', 'E'}, 'D': {'A'}, 'E': {'B'}})</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Vejamos agora como usar algumas das funções da classe <code>Grafo</code> implementada acima.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">print(grafo.get_vertices())</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>['A', 'B', 'C', 'D', 'E']</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">print(grafo.get_arestas())</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[('A', 'B'), ('B', 'C'), ('B', 'D'), ('C', 'B'), ('C', 'E'), ('D', 'A'), ('E', 'B')]</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">print(grafo.existe_aresta(<span class="hljs-string">'A'</span>, <span class="hljs-string">'B'</span>), grafo.existe_aresta(<span class="hljs-string">'E'</span>, <span class="hljs-string">'C'</span>))</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>True False</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_representação_implícita">Representação Implícita</h3>
+<div class="paragraph">
+<p>A diferença entre a representação explícita e a implícita é que nesta
+ cada vértice recebe automaticamente um identificador inteiro enquanto 
+naquela o nome de um vértice é definido arbitrariamente. Vejamos um 
+exemplo de grafo representado implicitamente.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">grafo = [ [<span class="hljs-number">1</span>],           <span class="hljs-comment"># Vizinhos do vértice 0.</span>
+          [<span class="hljs-number">2</span>, <span class="hljs-number">3</span>],        <span class="hljs-comment"># Vizinhos do vértice 1.</span>
+          [<span class="hljs-number">1</span>, <span class="hljs-number">4</span>],        <span class="hljs-comment"># Vizinhos do vértice 2.</span>
+          [<span class="hljs-number">0</span>],           <span class="hljs-comment"># Vizinhos do vértice 3.</span>
+          [<span class="hljs-number">1</span>]            <span class="hljs-comment"># Vizinhos do vértice 4.</span>
+        ]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>O grafo acima mostra uma representação equivalente à do grafo com o 
+qual vínhamos trabalhando até agora (o vértice 0 é equivalente ao A, o 
+vértice 1 ao B, e assim por diante). Veja abaixo uma figura ilustrando 
+esse grafo.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="Representando%20Grafos%20em%20Python%20-%20Algoritmos%20em%20Python_arquivos/ExemploGrafoImplicito.png" alt="Exemplo Grafo" width="200" height="200">
+</div>
+</div>
+<div class="paragraph">
+<p>Como exercício, veja se consegue adaptar a implementação da classe <code>Grafo</code>
+ para essa nova representação. Aqui está uma sugestão de implementação. 
+Basicamente, a única coisa que muda é a declaração da lista de 
+adjacências. Antes, ela era declarada assim:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">self.adj = defaultdict(set)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Agora, essa mesma estrutura pode ser declarada assim:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">self.adj = [[] <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> range(num_vertices)]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note que, como estamos representando cada vértice do grafo por um identificador inteiro (a posição do vértice na estrutura <code>adj</code>),
+ precisamos saber de antemão o número de vértices do grafo para 
+inicializar a lista de adjacências. Na prática, a implementação usando 
+dicionário é mais prática, mas pode ser mais lenta em alguns casos, 
+pois, apesar complexidade de se acessar um elemento em um dicionário ser
+ constante (como ocorre com as listas em Python), no pior caso essa 
+complexidade é linear no tamanho do dicionário.</p>
+</div>
+<div class="paragraph">
+<p>Veja abaixo como criar e imprimir um grafo com essa nova 
+implementação de listas de adjacência. A utilização do restante das 
+funções que implementamos anteriormente não muda.</p>
+</div>
+<div class="paragraph">
+<p>Agora que já sabemos como representar grafos em Python, precisamos entender como criar algoritmos que operem sobre esses grafos.</p>
+</div>
+</div>
+</div>
+</div>
+
+		</section>
+		
+		<section>
+			<div class="exercise">
+				<div class="title">
+				  <h2>Playground</h2>
+				</div>
+			
+				<div data-lang="python" data-height="auto" style="height: 300px;" class=" datacamp-exercise"><div class="dcl__index-module__app--3OG3a" style="height: 300px;"><a title="View DataCamp Light on GitHub" target="_blank" class="dcl__index-module__githubLink--3955G" href="https://github.com/datacamp/datacamp-light"><svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" preserveAspectRatio="xMidYMid"><g><path transform="scale(0.0625)" d="M128.00106,0 C57.3172926,0 0,57.3066942 0,128.00106 C0,184.555281 36.6761997,232.535542 87.534937,249.460899 C93.9320223,250.645779 96.280588,246.684165 96.280588,243.303333 C96.280588,240.251045 96.1618878,230.167899 96.106777,219.472176 C60.4967585,227.215235 52.9826207,204.369712 52.9826207,204.369712 C47.1599584,189.574598 38.770408,185.640538 38.770408,185.640538 C27.1568785,177.696113 39.6458206,177.859325 39.6458206,177.859325 C52.4993419,178.762293 59.267365,191.04987 59.267365,191.04987 C70.6837675,210.618423 89.2115753,204.961093 96.5158685,201.690482 C97.6647155,193.417512 100.981959,187.77078 104.642583,184.574357 C76.211799,181.33766 46.324819,170.362144 46.324819,121.315702 C46.324819,107.340889 51.3250588,95.9223682 59.5132437,86.9583937 C58.1842268,83.7344152 53.8029229,70.715562 60.7532354,53.0843636 C60.7532354,53.0843636 71.5019501,49.6441813 95.9626412,66.2049595 C106.172967,63.368876 117.123047,61.9465949 128.00106,61.8978432 C138.879073,61.9465949 149.837632,63.368876 160.067033,66.2049595 C184.49805,49.6441813 195.231926,53.0843636 195.231926,53.0843636 C202.199197,70.715562 197.815773,83.7344152 196.486756,86.9583937 C204.694018,95.9223682 209.660343,107.340889 209.660343,121.315702 C209.660343,170.478725 179.716133,181.303747 151.213281,184.472614 C155.80443,188.444828 159.895342,196.234518 159.895342,208.176593 C159.895342,225.303317 159.746968,239.087361 159.746968,243.303333 C159.746968,246.709601 162.05102,250.70089 168.53925,249.443941 C219.370432,232.499507 256,184.536204 256,128.00106 C256,57.3066942 198.691187,0 128.00106,0 Z M47.9405593,182.340212 C47.6586465,182.976105 46.6581745,183.166873 45.7467277,182.730227 C44.8183235,182.312656 44.2968914,181.445722 44.5978808,180.80771 C44.8734344,180.152739 45.876026,179.97045 46.8023103,180.409216 C47.7328342,180.826786 48.2627451,181.702199 47.9405593,182.340212 Z M54.2367892,187.958254 C53.6263318,188.524199 52.4329723,188.261363 51.6232682,187.366874 C50.7860088,186.474504 50.6291553,185.281144 51.2480912,184.70672 C51.8776254,184.140775 53.0349512,184.405731 53.8743302,185.298101 C54.7115892,186.201069 54.8748019,187.38595 54.2367892,187.958254 Z M58.5562413,195.146347 C57.7719732,195.691096 56.4895886,195.180261 55.6968417,194.042013 C54.9125733,192.903764 54.9125733,191.538713 55.713799,190.991845 C56.5086651,190.444977 57.7719732,190.936735 58.5753181,192.066505 C59.3574669,193.22383 59.3574669,194.58888 58.5562413,195.146347 Z M65.8613592,203.471174 C65.1597571,204.244846 63.6654083,204.03712 62.5716717,202.981538 C61.4524999,201.94927 61.1409122,200.484596 61.8446341,199.710926 C62.5547146,198.935137 64.0575422,199.15346 65.1597571,200.200564 C66.2704506,201.230712 66.6095936,202.705984 65.8613592,203.471174 Z M75.3025151,206.281542 C74.9930474,207.284134 73.553809,207.739857 72.1039724,207.313809 C70.6562556,206.875043 69.7087748,205.700761 70.0012857,204.687571 C70.302275,203.678621 71.7478721,203.20382 73.2083069,203.659543 C74.6539041,204.09619 75.6035048,205.261994 75.3025151,206.281542 Z M86.046947,207.473627 C86.0829806,208.529209 84.8535871,209.404622 83.3316829,209.4237 C81.8013,209.457614 80.563428,208.603398 80.5464708,207.564772 C80.5464708,206.498591 81.7483088,205.631657 83.2786917,205.606221 C84.8005962,205.576546 86.046947,206.424403 86.046947,207.473627 Z M96.6021471,207.069023 C96.7844366,208.099171 95.7267341,209.156872 94.215428,209.438785 C92.7295577,209.710099 91.3539086,209.074206 91.1652603,208.052538 C90.9808515,206.996955 92.0576306,205.939253 93.5413813,205.66582 C95.054807,205.402984 96.4092596,206.021919 96.6021471,207.069023 Z" fill="#161614"></path></g></svg></a><div class="dcl__index-module__exercise--3V29r"><div style="height: 252px;" class="dcl__index-module__editor--1TnrD"><div class="lm_goldenlayout lm_item lm_root" style="width: 820px; height: 252px;"><div class="lm_item lm_row" style="width: 820px; height: 252px;"><div class="lm_item lm_stack" style="width: 408px; height: 252px;"><div class="lm_header" style="height: 30px;"><ul class="lm_tabs"><li class="lm_tab lm_active" title="script.py" style="z-index: auto;"><i class="lm_left"></i><span class="lm_title">script.py</span><i class="lm_right"></i></li></ul><ul class="lm_controls"><li class="lm_tabdropdown" title="additional tabs" style="display: none;"></li><li class="lm_maximise" title="maximise"></li></ul><ul class="lm_tabdropdown_list" style="display: none;"></ul></div><div class="lm_items" style="width: 408px; height: 222px;"><div class="lm_item_container" style="width: 408px; height: 222px;"><div class="lm_content" style="width: 408px; height: 222px;"><div class="Editor-module__editor--3du3f"><div><div id="ace-code-editor-1" class=" ace_editor ace-crimson-editor custom-ace-editor" style="font-size: 0.85em;"><textarea class="ace_text-input" autocorrect="off" autocapitalize="none" spellcheck="false" style="opacity: 0; height: 22.9833px; width: 9.16667px; left: 136.5px; top: 114.917px;" wrap="off">  </textarea><div class="ace_gutter"><div class="ace_layer ace_gutter-layer ace_folding-enabled" style="margin-top: 0px; height: 267.967px; width: 43px;"><div class="ace_gutter-cell " style="height: 22.9833px;">1</div><div class="ace_gutter-cell " style="height: 22.9833px;">2</div><div class="ace_gutter-cell " style="height: 22.9833px;">3</div><div class="ace_gutter-cell " style="height: 22.9833px;">4</div><div class="ace_gutter-cell " style="height: 22.9833px;">5</div><div class="ace_gutter-cell " style="height: 22.9833px;">6</div></div><div class="ace_gutter-active-line" style="top: 114.917px; height: 22.9833px;"></div></div><div class="ace_scroller" style="left: 50px; right: 0px; bottom: 0px;"><div class="ace_content" style="margin-top: 0px; width: 358px; height: 267.967px; margin-left: 0px;"><div class="ace_layer ace_print-margin-layer"><div class="ace_print-margin" style="left: 737.333px; visibility: hidden;"></div></div><div class="ace_layer ace_marker-layer"><div class="ace_active-line" style="height:22.983322143554688px;top:114.91661071777344px;left:0;right:0;"></div><div class="ace_bracket ace_start ace_br15" style="height:22.983322143554688px;width:9.166666259765625px;top:0px;left:77.333330078125px;"></div></div><div class="ace_layer ace_text-layer" style="padding: 0px 4px;"><div class="ace_line_group" style="height:22.983322143554688px"><div class="ace_line" style="height:22.983322143554688px"><span class="ace_identifier">grafo</span> <span class="ace_keyword ace_operator">=</span> <span class="ace_paren ace_lparen">{</span> <span class="ace_string">"A"</span> : <span class="ace_paren ace_lparen">[</span><span class="ace_string">"B"</span><span class="ace_paren ace_rparen">]</span>,</div></div><div class="ace_line_group" style="height:22.983322143554688px"><div class="ace_line" style="height:22.983322143554688px">          <span class="ace_string">"B"</span> : <span class="ace_paren ace_lparen">[</span><span class="ace_string">"C"</span>, <span class="ace_string">"D"</span><span class="ace_paren ace_rparen">]</span>,</div></div><div class="ace_line_group" style="height:22.983322143554688px"><div class="ace_line" style="height:22.983322143554688px">          <span class="ace_string">"C"</span> : <span class="ace_paren ace_lparen">[</span><span class="ace_string">"B"</span>, <span class="ace_string">"E"</span><span class="ace_paren ace_rparen">]</span>,</div></div><div class="ace_line_group" style="height:22.983322143554688px"><div class="ace_line" style="height:22.983322143554688px">          <span class="ace_string">"D"</span> : <span class="ace_paren ace_lparen">[</span><span class="ace_string">"A"</span><span class="ace_paren ace_rparen">]</span>,</div></div><div class="ace_line_group" style="height:22.983322143554688px"><div class="ace_line" style="height:22.983322143554688px">          <span class="ace_string">"E"</span> : <span class="ace_paren ace_lparen">[</span><span class="ace_string">"B"</span><span class="ace_paren ace_rparen">]</span></div></div><div class="ace_line_group" style="height:22.983322143554688px"><div class="ace_line" style="height:22.983322143554688px">        <span class="ace_paren ace_rparen">}</span></div></div></div><div class="ace_layer ace_marker-layer"></div><div class="ace_layer ace_cursor-layer ace_hidden-cursors"><div class="ace_cursor" style="left: 86.5px; top: 114.917px; width: 9.16667px; height: 22.9833px;"></div></div></div></div><div class="ace_scrollbar ace_scrollbar-v" style="display: none; width: 17px; bottom: 0px;"><div class="ace_scrollbar-inner" style="width: 17px; height: 137.9px;"></div></div><div class="ace_scrollbar ace_scrollbar-h" style="height: 17px; left: 50px; right: 0px; display: none;"><div class="ace_scrollbar-inner" style="height: 17px; width: 358px;"></div></div><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font: inherit; overflow: hidden;"><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font: inherit; overflow: visible;"></div><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font-style: inherit; font-variant: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; font-size-adjust: inherit; font-kerning: inherit; font-optical-sizing: inherit; font-language-override: inherit; font-feature-settings: inherit; font-variation-settings: inherit; overflow: visible;">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div></div></div></div></div></div></div></div></div><div class="lm_splitter lm_horizontal" style="width: 5px;"><div class="lm_drag_handle" style="left: -5px; width: 15px;"></div></div><div class="lm_item lm_stack" style="width: 407px; height: 252px;"><div class="lm_header" style="height: 30px;"><ul class="lm_tabs"><li class="lm_tab lm_active" title="IPython Shell" style="z-index: auto;"><i class="lm_left"></i><span class="lm_title">IPython Shell</span><i class="lm_right"></i></li></ul><ul class="lm_controls"><li class="lm_tabdropdown" title="additional tabs" style="display: none;"></li><li class="lm_maximise" title="maximise"></li></ul><ul class="lm_tabdropdown_list" style="display: none;"></ul></div><div class="lm_items" style="width: 407px; height: 222px;"><div class="lm_item_container" style="width: 407px; height: 222px;"><div class="lm_content" style="width: 407px; height: 222px;"><div class="dcl__index-module__console--SWida"><div class="Console-module__console--I4oMQ dcl__index-module__console--SWida"><div id="ace-code-console-721706a7-65f9-4461-be24-ed2529102a70" class=" ace_editor ace-crimson-editor custom-ace-editor Console-module__console--I4oMQ dcl__index-module__console--SWida ace_selecting ace_focus" style="font-size: 0.8em; line-height: 1.6;"><textarea class="ace_text-input" autocorrect="off" autocapitalize="none" spellcheck="false" style="opacity: 0; height: 26.6167px; width: 8.63333px; left: 73.0667px; top: 0px;" wrap="off">  </textarea><div class="ace_gutter" style="display: none;"><div class="ace_layer ace_gutter-layer ace_folding-enabled" style="margin-top: 0px; height: 275.233px; width: 42px;"><div class="ace_gutter-cell " style="height: 26.6167px;">1<span class="ace_fold-widget ace_start ace_open" style="height: 26.6167px;"></span></div></div><div class="ace_gutter-active-line" style="top: 0px; height: 20.4px; display: none;"></div></div><div class="ace_scroller" style="left: 0px; right: 0px; bottom: 0px;"><div class="ace_content" style="margin-top: 0px; width: 407px; height: 275.233px; margin-left: 0px;"><div class="ace_layer ace_print-margin-layer"><div class="ace_print-margin" style="left: 694.667px; visibility: hidden;"></div></div><div class="ace_layer ace_marker-layer"></div><div class="ace_layer ace_text-layer" style="padding: 0px 4px;"><div class="ace_line_group" style="height:26.616668701171875px"><div class="ace_line" style="height:26.616668701171875px"><span class="ace_identifier">In [1]: </span><span class="ace_identifier"></span></div></div></div><div class="ace_layer ace_marker-layer"></div><div class="ace_layer ace_cursor-layer"><div class="ace_cursor" style="left: 73.0667px; top: 0px; width: 8.63333px; height: 26.6167px;"></div></div></div></div><div class="ace_scrollbar ace_scrollbar-v" style="display: none; width: 17px; bottom: 0px;"><div class="ace_scrollbar-inner" style="width: 17px; height: 26.6167px;"></div></div><div class="ace_scrollbar ace_scrollbar-h" style="display: none; height: 17px; left: 0px; right: 0px;"><div class="ace_scrollbar-inner" style="height: 17px; width: 407px;"></div></div><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font: inherit; overflow: hidden;"><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font: inherit; overflow: visible;"></div><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font-style: inherit; font-variant: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; font-size-adjust: inherit; font-kerning: inherit; font-optical-sizing: inherit; font-language-override: inherit; font-feature-settings: inherit; font-variation-settings: inherit; overflow: visible;">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div></div></div></div></div></div></div></div></div></div></div></div></div><div class="dcl__Footer-module__footer--1ztal"><button class="
+
+dcl__Button-module__button--3M3oN
+dcl__Button-module__primary--gfhd3
+dcl__Button-module__small--1nAmX
+dcl__Button-module__disabled--3y46V" disabled="disabled">Run</button><div class="_backendStatus_17b2u_1 dcl__Footer-module__status--2e0f2 _busy_17b2u_12"><svg aria-hidden="true" data-prefix="fas" data-icon="circle" class="svg-inline--fa fa-circle fa-w-16 _icon_17b2u_44" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path></svg><span class="_statusText_17b2u_24 _hidden_17b2u_41">Session Busy</span></div><div class="dcl__Footer-module__spacer--tB9UM"></div><a href="https://www.datacamp.com/?utm_source=datacamp_light&amp;utm_campaign=powered_by_datacamp" class="dcl__Footer-module__logo--2vNH-" title="Powered by DataCamp" target="_blank"><svg viewBox="0 0 20 20"><defs><style>
+    .cls-1{fill:#3ac;}.cls-2{fill:#fff;}</style></defs><title>Powered by DataCamp</title><g id="Calque_2" data-name="Calque 2"><g id="Calque_1-2" data-name="Calque 1" transform="scale(0.0625)"><path class="cls-1" d="M281.51,47.21h0L145.8.52a9.88,9.88,0,0,0-6.43,0L6.56,47.23A9.77,9.77,0,0,0,.06,57.52l18.7,176.93a9.82,9.82,0,0,0,5,7.56l115.55,63.55a9.81,9.81,0,0,0,9.54-.05l112.68-63.56a9.85,9.85,0,0,0,4.91-7.35L288,57.67A9.86,9.86,0,0,0,281.51,47.21Z"></path><path class="cls-2" d="M205.66,130.43c2.82-11.64,2.47-22.58-3.88-37.88,0,0,10.23,4,9.17-3.9s-12.34-16.17-20.8-21.44c-3.72-2.32-13.81-7.27-27.33-10.28l2.52-5.7-.7-.34c-21-10.21-45.23-1-45.48-.86l-.75.29,2.4,6.34a83.51,83.51,0,0,0-20.39,7.59C43.48,94.59,72.4,153.81,90,167.92s9.52,42.85,0,68.86h76.55c1.06-4.88.14,2.4,3.7-17s17.32-12.21,28.16-12.87,9.12-8.2,9-16.66c5.29-2.38,5.29-4.89,1.76-7.93,4.59-4.23,3.88-4.23,1.41-8.38s-.71-6.08-.71-6.08,7.4-1.44,8.46-5.31C218.7,154,202.84,142.07,205.66,130.43ZM189.84,128l-11.34-3.85c-.6,1.55-6.38,16-14,18.49l-7.16-9.46c-3.44,2.69-11.28,5.06-15.07,3.95v-.35l-.2,0,.21,26.08c-15,1.56-33-7.56-41.63-20.1l-9.41,7.14c-10.7-12.92-12.33-28.5-12.44-37.44H91.49c0-9.92,3.88-22.85,9.34-30l9.88,7,0,0c.8-1,8.27-9.92,18.26-13.15h0l.15,0L122,57.39c15.09-4.34,26.17-4.28,38.23.2a4.14,4.14,0,0,1,1,.52l.19.14-2.07,5.63h0v0c.56.25,8.57,3.84,11.88,7.22h0l2.66-3.68s15.61,8.41,20.37,27.13L190.11,96l0-.1A59.23,59.23,0,0,1,189.84,128Z"></path><path class="cls-2" d="M141.62,93.53a12.6,12.6,0,1,0,12.6,12.6A12.61,12.61,0,0,0,141.62,93.53Z"></path></g></g></svg></a></div></div></div>
+			  </div>
+		</section>
+		
+		<section class="page-navigation">
+			
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+						
+							
+								<a class="btn btn-outline-info btn-rounded waves-effect" href="https://algoritmosempython.com.br/cursos/algoritmos-python/intro-grafos" role="button"><i class="fa fa-long-arrow-left"></i> Anterior</a>
+							
+						
+
+						<a class="btn btn-outline-info" href="https://algoritmosempython.com.br/" role="button"><i class="fa fa-home"></i> Início</a>
+
+						
+							
+								<a class="btn btn-outline-info" href="https://algoritmosempython.com.br/cursos/algoritmos-python/intro-caminhamentos" role="button">Próximo <i class="fa fa-long-arrow-right"></i></a>
+							
+						
+					
+				
+				
+				</section>
+	</article>
+</main>
+<footer>
+<hr>
+<section class="newsletter">
+      <link href="Representando%20Grafos%20em%20Python%20-%20Algoritmos%20em%20Python_arquivos/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+      <style type="text/css">
+        #mc_embed_signup {
+        background: #fff;
+        clear: left;
+        font: 14px Helvetica, Arial, sans-serif;
+        width: 100%;
+        }
+      </style>
+      <div id="mc_embed_signup">
+        <form action="https://algoritmosempython.us20.list-manage.com/subscribe/post?u=369dc43c0df608951be8c6ddf&amp;id=b96228fca0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
+          <div id="mc_embed_signup_scroll">
+            <label for="mce-EMAIL">Inscreva-se em nossa newsletter!</label>
+            <input type="email" name="EMAIL" class="email" id="mce-EMAIL" placeholder="endereço de e-mail" required="">
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              <input type="text" name="b_369dc43c0df608951be8c6ddf_b96228fca0" tabindex="-1">
+            </div>
+            <div class="clear">
+              <input type="submit" value="Inscreva-se" name="subscribe" id="mc-embedded-subscribe" class="button">
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+</footer>
+
+
+
+
+</div>
+        
+        <script src="Representando%20Grafos%20em%20Python%20-%20Algoritmos%20em%20Python_arquivos/jquery-3.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="Representando%20Grafos%20em%20Python%20-%20Algoritmos%20em%20Python_arquivos/popper.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="Representando%20Grafos%20em%20Python%20-%20Algoritmos%20em%20Python_arquivos/bootstrap.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script> 
+               
+    
+
+<div style="position: absolute; width: 0px; height: 0px; overflow: hidden; padding: 0px; border: 0px none; margin: 0px;"><div id="MathJax_Font_Test" style="position: absolute; visibility: hidden; top: 0px; left: 0px; width: auto; padding: 0px; border: 0px none; margin: 0px; white-space: nowrap; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; font-size: 40px; font-weight: normal; font-style: normal; font-size-adjust: none; font-family: MathJax_Size4, sans-serif;"></div></div><div class="lm_dropTargetIndicator"><div class="lm_inner"></div></div><div class="lm_transition_indicator"></div></body></html>
