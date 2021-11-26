@@ -8,3 +8,21 @@ p{
 p.endereco{
      color: black;
 }
+
+#cabecalho{
+ background: yellow ;
+}
+#conteudo{
+	background: red;
+}
+#rodape {
+background: gray;
+}
+.coluna{
+	background: green;
+	
+	margin:10px;
+}
+.azul {
+	background: blue;
+}
